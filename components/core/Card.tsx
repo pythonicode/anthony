@@ -65,7 +65,7 @@ export default function Card({
           <div className="py-4 px-2">
             {children}
             <div className="flex flex-row justify-between">
-              <p>{minutes ? minutes + " minutes" : ""}</p>
+              <p>{minutes ? minutes + " minute read" : ""}</p>
               {!loading && (
                 <div className="flex flex-row items-center justify-center gap-2">
                   <FiEye />

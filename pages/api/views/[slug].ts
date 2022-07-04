@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           return now;
         });
 
-      return res.status(200).json({
+      return res.status(201).json({
         views: views,
       });
     } catch (error) {

@@ -116,6 +116,13 @@ const Posts: NextPage<Props> = ({ posts }) => {
         .map((post, i) => (
           <Post key={i} post={post} />
         ))}
+      <Link href="/posts/archive">
+        <a>
+          <div className="text-center text-gray-500 my-8">
+            Click Here for Archived Posts
+          </div>
+        </a>
+      </Link>
     </Layout>
   );
 };

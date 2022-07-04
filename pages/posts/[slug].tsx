@@ -1,4 +1,6 @@
 import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
   GetStaticPaths,
   GetStaticProps,
   GetStaticPropsContext,
@@ -7,19 +9,15 @@ import type {
 import Layout from "@/components/layout/Layout";
 import { serialize } from "next-mdx-remote/serialize";
 import ResponsiveImage from "@/components/core/ResponsiveImage";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { MDXRemote } from "next-mdx-remote";
 import Typography from "@/components/typography/Typography";
 import fs, { Dirent } from "fs";
-import { dateFormat, getDate } from "@/lib/date";
+import { getDate } from "@/lib/date";
 import List from "@/components/typography/List";
 import Link from "next/link";
-import { useState } from "react";
-import { useDocumentData } from "react-firebase-hooks/firestore";
-import { firestore } from "@/lib/firebase";
-import { doc } from "firebase/firestore";
 import { admin } from "@/lib/firebase-admin";
-import handler from "pages/api/views/[slug]";
 import { calculateReadingLength } from "@/lib/core";
+import { useEffect, useState } from "react";
 
 const components = {
   Link,
@@ -42,13 +40,32 @@ const components = {
 };
 
 type Props = {
+  slug: string;
   source: any;
   created: number;
   length: number;
-  views: number;
 };
 
-const Post: NextPage<Props> = ({ source, created, length, views }) => {
+const Post: NextPage<Props> = ({ slug, source, created, length }) => {
+  const [views, setViews] = useState<number | undefined>();
+
+  const getViews = async (): Promise<number> => {
+    const response = await fetch(`/api/views/${slug}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    const { views } = await response.json();
+    return views;
+  };
+
+  useEffect(() => {
+    getViews().then((views) => setViews(views));
+  }, []);
+
   return (
     <Layout>
       <article>
@@ -88,26 +105,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<{
-  source: MDXRemoteSerializeResult;
-}> = async ({ params }: GetStaticPropsContext) => {
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}: GetStaticPropsContext) => {
   const source = fs.readFileSync(`./posts/${params?.slug}.mdx`, "utf8");
   const serialized = await serialize(source, { parseFrontmatter: true });
   const created = fs.statSync(`./posts/${params?.slug}.mdx`).birthtime;
-  const ref = admin.firestore().doc(`post/${params?.slug}`);
-  const views = await admin.firestore().runTransaction(async (transaction) => {
-    const doc = await transaction.get(ref);
-    const now = doc.data() ? doc.data()!.views + 1 : 1;
-    if (doc.exists) transaction.update(ref, { views: now });
-    else transaction.set(ref, { views: now });
-    return now;
-  });
   return {
     props: {
+      slug: params?.slug,
       source: serialized,
       created: created.getTime(),
       length: source.length,
-      views: views,
     },
   };
 };

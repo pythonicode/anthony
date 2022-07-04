@@ -1,10 +1,14 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FiEye } from "react-icons/fi";
-import { useDocumentData } from "react-firebase-hooks/firestore";
 import { firestore } from "@/lib/firebase";
-import { doc } from "firebase/firestore";
+import {
+  doc,
+  DocumentData,
+  DocumentReference,
+  getDocFromServer,
+} from "firebase/firestore";
 
 type CardProps = {
   index?: number;
@@ -16,18 +20,33 @@ type CardProps = {
   views?: number;
 };
 
+const useDocumentDataOnce = (
+  ref: DocumentReference<DocumentData>
+): [DocumentData | undefined, boolean] => {
+  const [data, setData] = useState<DocumentData | undefined>();
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const getData = async () => {
+    const doc = await getDocFromServer(ref);
+    setData(doc.data());
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  return [data, loading];
+};
+
 export default function Card({
-  index,
   children,
   image,
   href = "",
   slug,
   minutes,
-  views,
 }: CardProps) {
-  const [value, loading, error, snapshot] = useDocumentData(
-    doc(firestore, "post", slug)
-  );
+  const [data, loading] = useDocumentDataOnce(doc(firestore, "post", slug));
 
   return (
     <Link href={href}>
@@ -50,9 +69,7 @@ export default function Card({
               {!loading && (
                 <div className="flex flex-row items-center justify-center gap-2">
                   <FiEye />
-                  <p>
-                    {value ? value.views : Math.ceil(Math.random() * 10 + 10)}
-                  </p>
+                  <p>{data ? data.views : "No Views"}</p>
                 </div>
               )}
             </div>

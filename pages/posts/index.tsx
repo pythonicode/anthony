@@ -88,12 +88,12 @@ const Posts: NextPage<Props> = ({ posts }) => {
         src="/images/blog/home.jpg"
         alt="Blog Home Page Action Shot"
       />
-      <div className="relative w-full mb-8 md:text-xl">
+      <div className="relative w-full mb-8">
         <input
           aria-label="Search"
           type="text"
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search articles"
+          placeholder="Search"
           className="block w-full px-4 py-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:border-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100"
         />
         <svg

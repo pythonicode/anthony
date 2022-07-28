@@ -1,7 +1,7 @@
-import Featured from "@/components/interface/Featured";
-import MorePosts from "@/components/interface/MorePosts";
-import Subscribe from "@/components/interface/Subscribe";
-import Welcome from "@/components/interface/Welcome";
+import Featured from "@/components/interface/index/Featured";
+import MorePosts from "@/components/interface/index/MorePosts";
+import Subscribe from "@/components/interface/index/Subscribe";
+import Welcome from "@/components/interface/index/Welcome";
 import Layout from "@/components/layout/Layout";
 import { Frontmatter } from "@/lib/types";
 import { Dirent } from "fs";
@@ -10,6 +10,7 @@ import { read } from "to-vfile";
 import { matter, VFile } from "vfile-matter";
 import fs from "fs";
 import { admin } from "@/lib/firebase-admin";
+import ProgressBar from "@/components/interface/blog/ProgressBar";
 
 type Post = {
   slug: string;

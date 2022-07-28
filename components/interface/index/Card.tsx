@@ -9,6 +9,7 @@ import {
   DocumentReference,
   getDocFromServer,
 } from "firebase/firestore";
+import { motion } from "framer-motion";
 
 type CardProps = {
   index?: number;
@@ -50,7 +51,7 @@ export default function Card({
 
   return (
     <Link href={href}>
-      <a className="transition-all rounded grow">
+      <a className="rounded grow md:max-w-[50%] hover:scale-[1.01] transition-transform border-animation">
         <div className="flex flex-col justify-between rounded cursor-pointer transition-all duration-300 w-full h-full">
           <div className="relative rounded aspect-video w-full">
             <Image

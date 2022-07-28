@@ -1,8 +1,6 @@
 import { calculateReadingLength } from "@/lib/core";
 import { Frontmatter } from "@/lib/types";
-import Card from "../core/Card";
-import { useDocumentOnce } from "react-firebase-hooks/firestore";
-import { doc } from "firebase/firestore";
+import Card from "./Card";
 
 type Post = {
   slug: string;

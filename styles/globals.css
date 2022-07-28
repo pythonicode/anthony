@@ -20,7 +20,7 @@ div#next {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   min-width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
@@ -41,4 +41,15 @@ a {
   color: transparent;
   overflow: hidden;
   visibility: hidden;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-color: rgb(0, 0, 0);
+  transform-origin: 0%;
+  overflow: auto;
 }

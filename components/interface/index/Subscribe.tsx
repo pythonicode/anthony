@@ -26,7 +26,7 @@ export default function Subscribe() {
     setTimeout(() => setMessage(""), 5000);
   };
   return (
-    <div className="w-full mt-16 p-4 md:p-8 border border-gray-500 rounded-xl">
+    <div className="w-full mt-16 p-4 md:p-8 border border-gray-500 rounded-xl transition-all hover:border-black dark:hover:border-white">
       <h3 className="md:text-xl font-bold text-center md:text-left">
         Subscribe to my Newsletter
       </h3>

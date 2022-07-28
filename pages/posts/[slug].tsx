@@ -1,6 +1,4 @@
 import type {
-  GetServerSideProps,
-  GetServerSidePropsContext,
   GetStaticPaths,
   GetStaticProps,
   GetStaticPropsContext,
@@ -15,9 +13,9 @@ import fs, { Dirent } from "fs";
 import { getDate } from "@/lib/date";
 import List from "@/components/typography/List";
 import Link from "next/link";
-import { admin } from "@/lib/firebase-admin";
 import { calculateReadingLength } from "@/lib/core";
 import { useEffect, useState } from "react";
+import ProgressBar from "@/components/interface/blog/ProgressBar";
 
 const components = {
   Link,
@@ -68,7 +66,7 @@ const Post: NextPage<Props> = ({ slug, source, created, length }) => {
 
   return (
     <Layout>
-      <article>
+      <article className="relative">
         <ResponsiveImage src={source.frontmatter.image} alt="Welcome Image" />
         <h1 className="text-5xl font-bold mb-8">{source.frontmatter.title}</h1>
         <div className="flex flex-row justify-between mb-16 items-center text-gray-500 overflow-x-hidden">
@@ -88,6 +86,7 @@ const Post: NextPage<Props> = ({ slug, source, created, length }) => {
           <p>{`${calculateReadingLength(length)} minute read`}</p>
         </div>
         <MDXRemote {...source} components={components} />
+        <ProgressBar />
       </article>
     </Layout>
   );

@@ -18,7 +18,7 @@ export default function Featured() {
         <a
           href="https://chain.link/hackathon"
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferer"
           className="flex flex-row gap-2 w-full items-center justify-center bg-yellow-300 dark:bg-opacity-50 rounded p-2"
         >
           <FaTrophy />
@@ -40,7 +40,7 @@ export default function Featured() {
           <a
             href="https://devpost.com/software/discharge"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferer"
             className="flex justify-center items-center gap-2 text-lg p-2 rounded cursor-pointer"
           >
             <FaLink /> Website
@@ -48,7 +48,7 @@ export default function Featured() {
           <a
             href="https://github.com/pythonicode/discharge"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferer"
             className="flex justify-center items-center gap-2 text-lg p-2 rounded cursor-pointer"
           >
             <FaGithub /> GitHub
@@ -56,7 +56,7 @@ export default function Featured() {
           <a
             href="https://www.youtube.com/watch?v=eDOFad7iedQ"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferer"
             className="flex justify-center items-center gap-2 text-lg p-2 rounded cursor-pointer"
           >
             <FaYoutube /> YouTube

@@ -53,7 +53,7 @@ const PortfolioItem: FC<PortfolioItemProps> = ({
             <a
               href={link}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferer"
               className="flex justify-center items-center gap-2 p-2 rounded cursor-pointer"
             >
               <FaLink /> Website
@@ -63,7 +63,7 @@ const PortfolioItem: FC<PortfolioItemProps> = ({
             <a
               href={github}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferer"
               className="flex justify-center items-center gap-2 p-2 rounded cursor-pointer"
             >
               <FaGithub /> GitHub
@@ -73,7 +73,7 @@ const PortfolioItem: FC<PortfolioItemProps> = ({
             <a
               href={youtube}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferer"
               className="flex justify-center items-center gap-2 p-2 rounded cursor-pointer"
             >
               <FaYoutube /> YouTube

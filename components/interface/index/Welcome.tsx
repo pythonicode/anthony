@@ -1,5 +1,24 @@
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Fade } from "react-awesome-reveal";
+
+const borderAnimation = {
+  rest: {
+    rotate: -135,
+  },
+  hover: {
+    rotate: -45,
+  },
+};
+
+const imageAnimation = {
+  rest: {
+    rotate: 0,
+  },
+  hover: {
+    rotate: -5,
+  },
+};
 
 export default function Welcome() {
   const now = new Date();
@@ -31,17 +50,27 @@ export default function Welcome() {
           work including blog posts, code snippets and other content.
         </p>
       </div>
-      <div className="relative w-4/5 p-2 m-2">
-        <div className="absolute z-10 top-0 left-0 bottom-0 right-0 border-8 border-transparent border-b-gray-700 dark:border-b-gray-200 border-t-gray-700 dark:border-t-gray-200 rounded-full w-full h-full rotate-[145deg]"></div>
-        <Image
-          src="/images/anthony.jpg"
-          alt="An action shot of Anthony orienteering."
-          layout="responsive"
-          height="300px"
-          width="300px"
-          className="rounded-full absolute z-0"
-        />
-      </div>
+      <motion.div
+        initial="rest"
+        whileHover="hover"
+        animate="rest"
+        className="relative w-4/5 p-2 m-2 cursor-pointer"
+      >
+        <motion.div
+          variants={borderAnimation}
+          className="absolute z-10 top-0 left-0 bottom-0 right-0 border-8 border-transparent border-b-gray-700 dark:border-b-gray-200 border-t-gray-700 dark:border-t-gray-200 rounded-full w-full h-full rotate-[145deg]"
+        ></motion.div>
+        <motion.div variants={imageAnimation} className="relative w-full">
+          <Image
+            src="/images/anthony.jpg"
+            alt="An action shot of Anthony orienteering."
+            layout="responsive"
+            height="300px"
+            width="300px"
+            className="rounded-full"
+          />
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

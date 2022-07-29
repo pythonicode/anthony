@@ -3,6 +3,7 @@ import NextLink from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import MobileMenu from "../core/MobileMenu";
+import { motion } from "framer-motion";
 
 type NavItemProps = {
   href: string;
@@ -21,13 +22,13 @@ function NavItem({ href, text }: NavItemProps) {
       ? "font-bold text-dark dark:text-light"
       : "hover:text-dark dark:hover:text-light") +
     " " +
-    `text-gray-500 transition-all duration-300 px-4 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 nav-item hidden md:inline-block text-lg`;
+    `text-gray-500 transition-all duration-300 px-4 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 nav-item hidden md:inline-block text-lg cursor-pointer`;
 
   return (
     <NextLink href={href}>
-      <a className={classes} title={text}>
+      <motion.a whileTap={{ scale: 0.9 }} className={classes} title={text}>
         {text}
-      </a>
+      </motion.a>
     </NextLink>
   );
 }
@@ -44,8 +45,7 @@ export default function Header() {
         <MobileMenu />
         <NavItem href="/" text="Home" />
         <NavItem href="/dashboard" text="Dashboard" />
-        <NavItem href="/portfolio" text="Portfolio" />
-        <NavItem href="/posts" text="Blog" />
+        <NavItem href="/posts" text="Posts" />
       </nav>
       <button
         aria-label="Toggle Dark Mode"

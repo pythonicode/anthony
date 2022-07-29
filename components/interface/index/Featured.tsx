@@ -1,5 +1,9 @@
+import Typography from "@/components/typography/Typography";
 import { calculateReadingLength } from "@/lib/core";
 import { Frontmatter } from "@/lib/types";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { FaArrowDown, FaChevronDown } from "react-icons/fa";
 import Card from "./Card";
 
 type Post = {
@@ -16,33 +20,50 @@ type Props = {
 export default function Featured({ posts }: Props) {
   return (
     <>
-      <h2 className="text-2xl md:text-4xl font-bold mb-8 mt-16 text-center md:text-left">
-        Featured Posts
-      </h2>
+      <div className="flex flex-row items-center mb-8 mt-16 ">
+        <div className="bg-gradient-to-b from-orange-500 to-yellow-500 w-2 h-10 mr-4" />
+        <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
+          Featured Posts
+        </h2>
+      </div>
 
       <div className="flex flex-col md:flex-row gap-8">
         {posts.map((post, i) => (
           <Card
             key={i}
             index={i}
-            image={post.frontmatter.image}
-            minutes={calculateReadingLength(post.content)}
-            slug={post.slug}
-            href={`/posts/${post.slug}`}
-          >
-            <h3 className="text-xl font-bold">{post.frontmatter.title}</h3>
-            <p className="my-2 text-gray-500">
-              {post.frontmatter.description
+            title={post.frontmatter.title}
+            description={
+              post.frontmatter.description
                 ? post.frontmatter.description.length < 164
                   ? post.frontmatter.description
                   : post.frontmatter.description.slice(0, 164) + "..."
                 : post.content.length < 164
                 ? post.content
-                : post.content.slice(0, 164) + "..."}
-            </p>
-          </Card>
+                : post.content.slice(0, 164) + "..."
+            }
+            image={post.frontmatter.image}
+            minutes={calculateReadingLength(post.content)}
+            slug={post.slug}
+            href={`/posts/${post.slug}`}
+          />
         ))}
       </div>
+
+      <Link href="/posts">
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          className="flex flex-row items-center justify-center w-full my-8 group cursor-pointer"
+        >
+          <hr className="grow border-b border-gray-500 group-hover:border-black dark:group-hover:border-white" />
+          <div className="flex flex-col items-center justify-center">
+            <motion.a className="text-gray-500 group-hover:text-black dark:group-hover:text-white text-xl transition-colors mx-10">
+              More Posts
+            </motion.a>
+          </div>
+          <hr className="grow border-b border-gray-500 group-hover:border-black dark:group-hover:border-white" />
+        </motion.div>
+      </Link>
     </>
   );
 }

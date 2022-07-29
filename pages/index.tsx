@@ -1,5 +1,4 @@
 import Featured from "@/components/interface/index/Featured";
-import MorePosts from "@/components/interface/index/MorePosts";
 import Subscribe from "@/components/interface/index/Subscribe";
 import Welcome from "@/components/interface/index/Welcome";
 import Layout from "@/components/layout/Layout";
@@ -11,6 +10,7 @@ import { matter, VFile } from "vfile-matter";
 import fs from "fs";
 import { admin } from "@/lib/firebase-admin";
 import ProgressBar from "@/components/interface/blog/ProgressBar";
+import Portfolio from "@/components/interface/index/Portfolio";
 
 type Post = {
   slug: string;
@@ -33,9 +33,7 @@ const Home: NextPage<Props> = ({ posts, mostViews }) => {
     <Layout>
       <Welcome />
       <Featured posts={[topPost!, recentPost]} />
-      <MorePosts
-        posts={posts.filter((post) => post != topPost && post != recentPost)}
-      />
+      <Portfolio />
       <Subscribe />
     </Layout>
   );

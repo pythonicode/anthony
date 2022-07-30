@@ -1,3 +1,4 @@
+import Title from "@/components/typography/Title";
 import Typography from "@/components/typography/Typography";
 import { calculateReadingLength } from "@/lib/core";
 import { Frontmatter } from "@/lib/types";
@@ -20,13 +21,7 @@ type Props = {
 export default function Featured({ posts }: Props) {
   return (
     <>
-      <div className="flex flex-row items-center mb-8 mt-16 ">
-        <div className="bg-gradient-to-b from-orange-500 to-yellow-500 w-2 h-10 mr-4" />
-        <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
-          Featured Posts
-        </h2>
-      </div>
-
+      <Title color="gold">Featured Posts</Title>
       <div className="flex flex-col md:flex-row gap-8">
         {posts.map((post, i) => (
           <Card

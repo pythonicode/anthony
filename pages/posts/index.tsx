@@ -10,6 +10,7 @@ import Link from "next/link";
 import ResponsiveImage from "@/components/core/ResponsiveImage";
 import { getDate } from "@/lib/date";
 import { calculateReadingLength } from "@/lib/core";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Post = {
   slug: string;
@@ -25,8 +26,16 @@ type Props = {
 const Post: FC<{ post: Post }> = ({ post }) => {
   return (
     <Link href={`/posts/${post.slug}`}>
-      <div className="flex flex-col md:flex-row my-4 gap-8 md:h-40 cursor-pointer transition hover:bg-gray-100  dark:hover:bg-gray-800 w-full p-4 rounded">
-        <div className="relative w-full md:w-[unset] h-[unset] md:h-full aspect-video md:aspect-square bg-gray-500 rounded">
+      <motion.div
+        initial="initial"
+        whileHover="hover"
+        whileTap={{ scale: 0.95 }}
+        className="flex flex-col md:flex-row my-4 gap-8 md:h-40 cursor-pointer transition hover:bg-gray-100  dark:hover:bg-gray-800 w-full p-4 rounded"
+      >
+        <motion.div
+          variants={{ hover: { rotate: -2 } }}
+          className="relative w-full md:w-[unset] h-[unset] md:h-full aspect-video md:aspect-square bg-gray-500 rounded"
+        >
           <Image
             src={post.frontmatter.image}
             alt="Blog Post Featured Image"
@@ -35,8 +44,11 @@ const Post: FC<{ post: Post }> = ({ post }) => {
             objectFit="cover"
             className="rounded"
           />
-        </div>
-        <div className="flex flex-col grow min-w-0 justify-between">
+        </motion.div>
+        <motion.div
+          variants={{ hover: { scale: 1.01 } }}
+          className="flex flex-col grow min-w-0 justify-between"
+        >
           <h3 className="text-xl md:text-3xl font-bold mb-2 whitespace-nowrap overflow-hidden">
             {post.frontmatter.title}
           </h3>
@@ -63,8 +75,8 @@ const Post: FC<{ post: Post }> = ({ post }) => {
             </div>
             <a className="whitespace-nowrap text-blue-500">Read More</a>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </Link>
   );
 };

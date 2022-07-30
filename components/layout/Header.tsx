@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -11,22 +10,13 @@ type NavItemProps = {
 };
 
 function NavItem({ href, text }: NavItemProps) {
-  const router = useRouter();
-  const isActive =
-    href === "" || href === "/"
-      ? router.asPath === href
-      : router.asPath.startsWith(href);
-
-  const classes =
-    (isActive
-      ? "font-bold text-dark dark:text-light"
-      : "hover:text-dark dark:hover:text-light") +
-    " " +
-    `text-gray-500 transition-all duration-300 px-4 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 nav-item hidden md:inline-block text-lg cursor-pointer`;
-
   return (
     <NextLink href={href}>
-      <motion.a whileTap={{ scale: 0.9 }} className={classes} title={text}>
+      <motion.a
+        whileTap={{ scale: 0.9 }}
+        className="text-gray-500 transition-all duration-300 px-4 py-1 rounded hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 nav-item hidden md:inline-block text-lg cursor-pointer font-bold"
+        title={text}
+      >
         {text}
       </motion.a>
     </NextLink>
@@ -44,8 +34,8 @@ export default function Header() {
       <nav className="relative flex flex-row gap-2">
         <MobileMenu />
         <NavItem href="/" text="Home" />
-        <NavItem href="/dashboard" text="Dashboard" />
         <NavItem href="/posts" text="Posts" />
+        <NavItem href="/dashboard" text="Dashboard" />
       </nav>
       <button
         aria-label="Toggle Dark Mode"

@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@react-three/fiber": "^8.0.27",
+    "@types/react-syntax-highlighter": "^15.5.4",
     "firebase": "^9.8.4",
     "firebase-admin": "^11.0.0",
     "framer-motion": "^6.5.1",
@@ -20,10 +21,12 @@
     "next-themes": "^0.2.0",
     "react": "^18.2.0",
     "react-awesome-reveal": "^4.0.0-beta.2",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.0.3",
     "react-icons": "^4.4.0",
     "react-scripts": "^5.0.1",
+    "react-syntax-highlighter": "^15.5.0",
     "three": "^0.142.0",
     "to-vfile": "^7.2.3",
     "vfile-matter": "^4.0.0"
@@ -31,6 +34,7 @@
   "devDependencies": {
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
+    "@types/react-copy-to-clipboard": "^5.0.4",
     "@types/react-dom": "18.0.5",
     "autoprefixer": "^10.4.7",
     "eslint": "8.18.0",

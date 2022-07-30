@@ -1,3 +1,4 @@
+import Title from "@/components/typography/Title";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,6 +23,7 @@ export function PortfolioItem({
       <motion.a
         initial="initial"
         whileHover="hover"
+        whileTap={{ scale: 0.95, rotate: -5 }}
         className="flex flex-col gap-4 grow cursor-pointer items-center justify-center relative mt-40"
       >
         <motion.div
@@ -58,12 +60,7 @@ export function PortfolioItem({
 export default function Portfolio() {
   return (
     <>
-      <div className="flex flex-row items-center mb-8 mt-16 ">
-        <div className="bg-gradient-to-b from-orange-500 to-yellow-500 w-2 h-10 mr-4" />
-        <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
-          Portfolio
-        </h2>
-      </div>
+      <Title color="gold">Portfolio</Title>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 items-center gap-10 relative">
         <PortfolioItem
           title="Discharge"

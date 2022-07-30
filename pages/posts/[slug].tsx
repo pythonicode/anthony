@@ -78,10 +78,12 @@ const Post: NextPage<Props> = ({ slug, source, created, length }) => {
                 <p>{source.frontmatter.tags[0]}</p>
               </>
             )}
-            <>
-              <p>&bull;</p>
-              <p>{views} views</p>
-            </>
+            {views && (
+              <>
+                <p>&bull;</p>
+                <p>{views} views</p>
+              </>
+            )}
           </div>
           <p>{`${calculateReadingLength(length)} minute read`}</p>
         </div>

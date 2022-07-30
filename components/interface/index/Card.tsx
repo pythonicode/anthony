@@ -156,7 +156,7 @@ export default function Card({
           </motion.div>
           <motion.h3
             variants={index == 0 ? textMotion : textMotion2}
-            className="text-xl md:text-2xl font-bold my-4 text-transparent bg-clip-text dark:bg-gradient-to-b dark:from-orange-500 dark:to-yellow-300 bg-gradient-to-b from-gray-900 to-gray-600"
+            className="text-xl md:text-2xl font-bold my-4 text-transparent bg-clip-text dark:bg-gradient-to-b dark:from-orange-500 dark:to-yellow-500 bg-gradient-to-b from-black to-black"
           >
             {title}
           </motion.h3>

@@ -42,7 +42,7 @@ export function PortfolioItem({
         </motion.div>
         <motion.div
           variants={{ hover: { scale: 1.05 } }}
-          className="relative flex flex-col border p-4 z-10 bg-white dark:bg-dark gap-2 rounded"
+          className="relative flex flex-col border border-gray-200 dark:border-gray-800 p-4 z-10 bg-white dark:bg-dark gap-2 rounded"
         >
           <h3 className="font-bold text-3xl">{title}</h3>
           <div className="flex flex-row items-center gap-2">

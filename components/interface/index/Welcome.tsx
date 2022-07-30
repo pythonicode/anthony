@@ -54,11 +54,11 @@ export default function Welcome() {
         initial="rest"
         whileHover="hover"
         animate="rest"
-        className="relative w-4/5 p-2 m-2 cursor-pointer"
+        className="relative w-4/5 p-1 m-2 cursor-pointer"
       >
         <motion.div
           variants={borderAnimation}
-          className="absolute z-10 top-0 left-0 bottom-0 right-0 border-8 border-transparent border-b-gray-700 dark:border-b-gray-200 border-t-gray-700 dark:border-t-gray-200 rounded-full w-full h-full rotate-[145deg]"
+          className="absolute z-10 top-0 left-0 bottom-0 right-0 border-8 border-transparent border-b-dark dark:border-b-white border-t-dark dark:border-t-white rounded-full w-full h-full rotate-[145deg]"
         ></motion.div>
         <motion.div variants={imageAnimation} className="relative w-full">
           <Image

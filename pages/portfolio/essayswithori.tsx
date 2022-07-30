@@ -134,7 +134,7 @@ const EssaysWithOri: NextPage = () => {
           href="https://github.com/pythonicode/essays-with-ori"
           className="grow"
         >
-          <div className="flex flex-row p-4 bg-dark rounded gap-4 items-center justify-center border w-full">
+          <div className="flex flex-row p-4 bg-dark dark:bg-gray-800 rounded gap-4 items-center justify-center w-full">
             <FaGithub color="white" size="32px" />
             <h4 className="text-white text-xl font-bold pb-1">
               Source Code on GitHub

@@ -78,14 +78,14 @@ const Discharge: NextPage = () => {
           />
         </motion.div>
       </div>
-      <div className="flex flex-row gap-4 mb-20 w-full">
+      <div className="flex flex-col md:flex-row gap-4 mb-20 w-full">
         <motion.a
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           href="https://github.com/pythonicode/discharge"
           className="grow"
         >
-          <div className="flex flex-row p-4 bg-dark rounded gap-4 items-center justify-center border w-full">
+          <div className="flex flex-row p-4 bg-dark dark:bg-gray-800 rounded gap-4 items-center justify-center w-full">
             <FaGithub color="white" size="32px" />
             <h4 className="text-white text-xl font-bold pb-1">
               Open in GitHub

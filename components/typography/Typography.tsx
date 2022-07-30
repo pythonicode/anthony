@@ -10,7 +10,7 @@ export default function Typography({
   gradient?: boolean;
 }) {
   const gradients = gradient
-    ? "text-transparent bg-clip-text dark:bg-gradient-to-b dark:from-orange-400 dark:to-yellow-300 bg-gradient-to-b from-blue-700 to-blue-400 pb-2"
+    ? "text-transparent bg-clip-text dark:bg-gradient-to-b dark:from-orange-400 dark:to-yellow-300 bg-gradient-to-b from-blue-600 to-blue-500 pb-2"
     : "pb-2";
 
   if (variant == "h1")

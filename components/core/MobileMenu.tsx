@@ -28,14 +28,11 @@ export default function MobileMenu() {
             <Link href="/">
               <a className="text-3xl font-bold">Home</a>
             </Link>
+            <Link href="/posts">
+              <a className="text-3xl font-bold">Posts</a>
+            </Link>
             <Link href="/dashboard">
               <a className="text-3xl font-bold">Dashboard</a>
-            </Link>
-            <Link href="/portfolio">
-              <a className="text-3xl font-bold">Portfolio</a>
-            </Link>
-            <Link href="/posts">
-              <a className="text-3xl font-bold">Blog</a>
             </Link>
           </Slide>
         )}

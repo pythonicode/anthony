@@ -60,7 +60,9 @@ export function PortfolioItem({
 export default function Portfolio() {
   return (
     <>
-      <Title color="gold">Portfolio</Title>
+      <Title color="gold" id="portfolio">
+        Portfolio
+      </Title>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 items-center gap-10 relative">
         <PortfolioItem
           title="Discharge"

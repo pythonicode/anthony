@@ -8,7 +8,7 @@ import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ResponsiveImage from "@/components/core/ResponsiveImage";
-import { getDate } from "@/lib/date";
+import { getDate, getDateFromString } from "@/lib/date";
 import { calculateReadingLength } from "@/lib/core";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -16,7 +16,6 @@ type Post = {
   slug: string;
   frontmatter: Frontmatter;
   content: string;
-  created: number;
 };
 
 type Props = {
@@ -63,7 +62,7 @@ const Post: FC<{ post: Post }> = ({ post }) => {
           </p>
           <div className="flex flex-row py-1 mt-2 justify-between items-center gap-4">
             <div className="flex flex-row gap-2 grow whitespace-nowrap overflow-hidden">
-              <p>{getDate(post.created)}</p>
+              <p>{getDateFromString(post.frontmatter.date)}</p>
               <p>&bull;</p>
               <p>{`${calculateReadingLength(post.content)} minute read`}</p>
               {post.frontmatter.tags && (
@@ -124,7 +123,11 @@ const Posts: NextPage<Props> = ({ posts }) => {
         </svg>
       </div>
       {filtered
-        .sort((post1, post2) => post2.created - post1.created)
+        .sort(
+          (post1, post2) =>
+            new Date(post2.frontmatter.date).getTime() -
+            new Date(post1.frontmatter.date).getTime()
+        )
         .map((post, i) => (
           <Post key={i} post={post} />
         ))}
@@ -156,7 +159,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
       slug: file.name.slice(0, file.name.lastIndexOf(".")),
       frontmatter: source.data.matter as Frontmatter,
       content: (content.match(/[A-Za-z0-9 _.,!"?']*/g) || []).join(" "),
-      created: created.getTime(),
     });
   }
   return { props: { posts } };

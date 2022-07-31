@@ -10,7 +10,7 @@ import ResponsiveImage from "@/components/core/ResponsiveImage";
 import { MDXRemote } from "next-mdx-remote";
 import Typography from "@/components/typography/Typography";
 import fs, { Dirent } from "fs";
-import { getDate } from "@/lib/date";
+import { getDate, getDateFromString } from "@/lib/date";
 import List from "@/components/typography/List";
 import Link from "next/link";
 import { calculateReadingLength } from "@/lib/core";
@@ -40,11 +40,10 @@ const components = {
 type Props = {
   slug: string;
   source: any;
-  created: number;
   length: number;
 };
 
-const Post: NextPage<Props> = ({ slug, source, created, length }) => {
+const Post: NextPage<Props> = ({ slug, source, length }) => {
   const [views, setViews] = useState<number | undefined>();
 
   const getViews = async (): Promise<number> => {
@@ -71,7 +70,9 @@ const Post: NextPage<Props> = ({ slug, source, created, length }) => {
         <h1 className="text-5xl font-bold mb-8">{source.frontmatter.title}</h1>
         <div className="flex flex-row justify-between mb-16 items-center text-gray-500 overflow-x-hidden">
           <div className="flex flex-row gap-2">
-            <p className="whitespace-nowrap">{getDate(created)}</p>
+            <p className="whitespace-nowrap">
+              {getDateFromString(source.frontmatter.date)}
+            </p>
             {source.frontmatter.tags && (
               <>
                 <p>&bull;</p>
@@ -111,12 +112,10 @@ export const getStaticProps: GetStaticProps = async ({
 }: GetStaticPropsContext) => {
   const source = fs.readFileSync(`./posts/${params?.slug}.mdx`, "utf8");
   const serialized = await serialize(source, { parseFrontmatter: true });
-  const created = fs.statSync(`./posts/${params?.slug}.mdx`).birthtime;
   return {
     props: {
       slug: params?.slug,
       source: serialized,
-      created: created.getTime(),
       length: source.length,
     },
   };

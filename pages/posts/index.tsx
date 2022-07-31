@@ -32,7 +32,7 @@ const Post: FC<{ post: Post }> = ({ post }) => {
         className="flex flex-col md:flex-row my-4 gap-8 md:h-40 cursor-pointer transition hover:bg-gray-100  dark:hover:bg-gray-800 w-full p-4 rounded"
       >
         <motion.div
-          variants={{ hover: { rotate: -2 } }}
+          variants={{ hover: { rotate: -2, scale: 1.05 } }}
           className="relative w-full md:w-[unset] h-[unset] md:h-full aspect-video md:aspect-square bg-gray-500 rounded"
         >
           <Image

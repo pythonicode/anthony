@@ -68,7 +68,7 @@ const Post: NextPage<Props> = ({ slug, source, length }) => {
       <article className="relative">
         <ResponsiveImage src={source.frontmatter.image} alt="Welcome Image" />
         <h1 className="text-5xl font-bold mb-8">{source.frontmatter.title}</h1>
-        <div className="flex flex-row justify-between mb-16 items-center text-gray-500 overflow-x-hidden">
+        <div className="flex flex-row justify-between mb-16 gap-4 items-center text-gray-500 flex-wrap">
           <div className="flex flex-row gap-2">
             <p className="whitespace-nowrap">
               {getDateFromString(source.frontmatter.date)}
@@ -76,17 +76,21 @@ const Post: NextPage<Props> = ({ slug, source, length }) => {
             {source.frontmatter.tags && (
               <>
                 <p>&bull;</p>
-                <p>{source.frontmatter.tags[0]}</p>
+                <p className="whitespace-nowrap">
+                  {source.frontmatter.tags[0]}
+                </p>
               </>
             )}
             {views && (
               <>
                 <p>&bull;</p>
-                <p>{views} views</p>
+                <p className="whitespace-nowrap">{views} views</p>
               </>
             )}
           </div>
-          <p>{`${calculateReadingLength(length)} minute read`}</p>
+          <p className="whitespace-nowrap">
+            {`${calculateReadingLength(length)} minute read`}
+          </p>
         </div>
         <MDXRemote {...source} components={components} />
         <ProgressBar />

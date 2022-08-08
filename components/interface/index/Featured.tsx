@@ -1,10 +1,8 @@
 import Title from "@/components/typography/Title";
-import Typography from "@/components/typography/Typography";
 import { calculateReadingLength } from "@/lib/core";
 import { Frontmatter } from "@/lib/types";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaArrowDown, FaChevronDown } from "react-icons/fa";
 import Card from "./Card";
 
 type Post = {
@@ -54,7 +52,7 @@ export default function Featured({ posts }: Props) {
           <div className="flex flex-col items-center justify-center">
             <motion.a className="text-gray-500 group-hover:text-black dark:group-hover:text-white text-xl transition-colors mx-10">
               More Posts
-            </motion.a>
+            </motion.a> 
           </div>
           <hr className="grow border-b border-gray-500 group-hover:border-black dark:group-hover:border-white" />
         </motion.div>

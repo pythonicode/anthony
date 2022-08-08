@@ -47,7 +47,11 @@ export function PortfolioItem({
           <h3 className="font-bold text-3xl">{title}</h3>
           <div className="flex flex-row items-center gap-2">
             {tags.map((tag, i) =>
-              i < tags.length - 1 ? <div>{tag} &bull;</div> : <div>{tag}</div>
+              i < tags.length - 1 ? (
+                <div key={i}>{tag} &bull;</div>
+              ) : (
+                <div key={i}>{tag}</div>
+              )
             )}
           </div>
           <p className="text-gray-500">{description}</p>

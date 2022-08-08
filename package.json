@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
+    "@mdx-js/mdx": "^2.1.2",
+    "@mdx-js/react": "^2.1.2",
     "@react-three/fiber": "^8.0.27",
     "@types/react-syntax-highlighter": "^15.5.4",
     "firebase": "^9.8.4",
@@ -29,6 +31,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "three": "^0.142.0",
     "to-vfile": "^7.2.3",
+    "vercel-rust": "^3.1.2",
     "vfile-matter": "^4.0.0"
   },
   "devDependencies": {

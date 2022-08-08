@@ -14,7 +14,7 @@ import { getDate, getDateFromString } from "@/lib/date";
 import List from "@/components/typography/List";
 import Link from "next/link";
 import { calculateReadingLength } from "@/lib/core";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import ProgressBar from "@/components/interface/blog/ProgressBar";
 
 const components = {

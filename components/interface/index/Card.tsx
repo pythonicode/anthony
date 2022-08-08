@@ -72,7 +72,7 @@ const textMotion = {
   hover: {
     rotate: -95,
     x: -210,
-    y: -120,
+    y: -100,
     transition: {
       duration: 0.5,
       type: "tween",
@@ -91,8 +91,8 @@ const textMotion2 = {
   },
   hover: {
     rotate: 85,
-    x: 200,
-    y: -50,
+    x: 220,
+    y: -80,
     transition: {
       duration: 0.5,
       type: "tween",
@@ -156,7 +156,7 @@ export default function Card({
           </motion.div>
           <motion.h3
             variants={index == 0 ? textMotion : textMotion2}
-            className="text-xl md:text-2xl font-bold my-4 text-transparent bg-clip-text dark:bg-gradient-to-b dark:from-orange-500 dark:to-yellow-500 bg-gradient-to-b from-black to-black"
+            className="text-xl md:text-2xl font-bold my-4 text-transparent bg-clip-text dark:bg-gradient-to-b dark:from-orange-500 dark:to-yellow-500 bg-gradient-to-b from-black to-black whitespace-nowrap overflow-x-hidden"
           >
             {title}
           </motion.h3>

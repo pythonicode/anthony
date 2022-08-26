@@ -518,6 +518,7 @@ dependencies = [
 name = "index"
 version = "1.0.0"
 dependencies = [
+ "base64",
  "http",
  "image",
  "vercel_lambda",

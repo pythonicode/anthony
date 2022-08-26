@@ -39,3 +39,5 @@ yarn-error.log*
 
 # rust
 /api/target
+
+.vercel

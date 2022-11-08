@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Fade } from "react-awesome-reveal";
+import { useEffect, useState } from "react";
 
 const borderAnimation = {
   rest: {
@@ -30,6 +30,12 @@ export default function Welcome() {
     return age;
   };
 
+  const [age, setAge] = useState(0);
+
+  useEffect(() => {
+    setAge(calculateAge());
+  }, []);
+
   return (
     <div className="flex flex-col-reverse justify-between items-center md:flex-row">
       <div className="grow">
@@ -37,7 +43,7 @@ export default function Welcome() {
           Anthony Riley
         </h1>
         <div className="flex flex-row gap-2 my-4 justify-center md:justify-start">
-          <h3>{calculateAge()}</h3>
+          <h3>{age}</h3>
           <h3>&bull;</h3>
           <h3>Athlete </h3>
           <h3>&bull;</h3>
@@ -45,7 +51,7 @@ export default function Welcome() {
           <h3>&bull;</h3>
           <h3>Entrepreneur</h3>
         </div>
-        <p className="text-gray-500 text-center md:text-left">
+        <p className="text-neutral-500 dark:text-neutral-400 text-center md:text-left">
           Welcome to my website! Here you can find all information related to my
           work including blog posts, code snippets and other content.
         </p>
@@ -65,8 +71,8 @@ export default function Welcome() {
             src="/images/anthony.jpg"
             alt="An action shot of Anthony orienteering."
             layout="responsive"
-            height="300px"
-            width="300px"
+            height={300}
+            width={300}
             className="rounded-full"
           />
         </motion.div>

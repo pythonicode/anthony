@@ -60,8 +60,8 @@ const Discharge: NextPage = () => {
           <Image
             src="/images/portfolio/discharge/welcome.png"
             alt="Discharge"
-            width="396px"
-            height="598px"
+            width={396}
+            height={598}
             draggable={false}
           />
         </motion.div>
@@ -72,8 +72,8 @@ const Discharge: NextPage = () => {
           <Image
             src="/images/portfolio/discharge/signup.png"
             alt="Discharge"
-            width="396px"
-            height="598px"
+            width={396}
+            height={598}
             draggable={false}
           />
         </motion.div>
@@ -85,7 +85,7 @@ const Discharge: NextPage = () => {
           href="https://github.com/pythonicode/discharge"
           className="grow"
         >
-          <div className="flex flex-row p-4 bg-dark dark:bg-gray-800 rounded gap-4 items-center justify-center w-full">
+          <div className="flex flex-row p-4 bg-dark dark:bg-neutral-800 rounded gap-4 items-center justify-center w-full">
             <FaGithub color="white" size="32px" />
             <h4 className="text-white text-xl font-bold pb-1">
               Open in GitHub

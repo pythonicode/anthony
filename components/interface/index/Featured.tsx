@@ -32,8 +32,8 @@ export default function Featured({ posts }: Props) {
                   ? post.frontmatter.description
                   : post.frontmatter.description.slice(0, 164) + "..."
                 : post.content.length < 164
-                ? post.content
-                : post.content.slice(0, 164) + "..."
+                  ? post.content
+                  : post.content.slice(0, 164) + "..."
             }
             image={post.frontmatter.image}
             minutes={calculateReadingLength(post.content)}
@@ -45,16 +45,16 @@ export default function Featured({ posts }: Props) {
 
       <Link href="/posts">
         <motion.div
-          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           className="flex flex-row items-center justify-center w-full my-8 group cursor-pointer"
         >
-          <hr className="grow border-b border-gray-500 group-hover:border-black dark:group-hover:border-white" />
+          <hr className="grow border-b border-neutral-500 group-hover:border-black dark:group-hover:border-white transition-colors" />
           <div className="flex flex-col items-center justify-center">
-            <motion.a className="text-gray-500 group-hover:text-black dark:group-hover:text-white text-xl transition-colors mx-10">
+            <div className="text-neutral-500 group-hover:text-black dark:group-hover:text-white text-xl transition-colors mx-10">
               More Posts
-            </motion.a> 
+            </div>
           </div>
-          <hr className="grow border-b border-gray-500 group-hover:border-black dark:group-hover:border-white" />
+          <hr className="grow border-b border-neutral-500 group-hover:border-black dark:group-hover:border-white transition-colors" />
         </motion.div>
       </Link>
     </>

@@ -17,8 +17,8 @@ const EssaysWithOri: NextPage = () => {
         <Image
           src="/images/portfolio/essayswithori/landing_light.png"
           alt="Essays With Ori"
-          width="1156px"
-          height="650px"
+          width={1156}
+          height={650}
           layout="responsive"
           draggable={false}
         />
@@ -26,8 +26,8 @@ const EssaysWithOri: NextPage = () => {
         <Image
           src="/images/portfolio/essayswithori/landing_dark.png"
           alt="Essays With Ori"
-          width="1156px"
-          height="650px"
+          width={1156}
+          height={650}
           layout="responsive"
           draggable={false}
         />
@@ -66,8 +66,8 @@ const EssaysWithOri: NextPage = () => {
             <Image
               src="/images/portfolio/essayswithori/mantine.png"
               alt="Mantine Logo"
-              width="100px"
-              height="100px"
+              width={100}
+              height={100}
               className="rounded-xl"
               draggable={false}
             />
@@ -94,8 +94,8 @@ const EssaysWithOri: NextPage = () => {
             <Image
               src="/images/portfolio/essayswithori/firebase.png"
               alt="Mantine Logo"
-              width="222px"
-              height="302px"
+              width={222}
+              height={302}
               className="rounded-xl"
               draggable={false}
             />
@@ -116,9 +116,9 @@ const EssaysWithOri: NextPage = () => {
             <Image
               src="/images/portfolio/essayswithori/vercel.jpg"
               alt="Mantine Logo"
-              width="100px"
-              height="100px"
-              className="rounded-xl"
+              width={100}
+              height={100}
+              className="rounded-xl border"
               draggable={false}
             />
           </a>
@@ -134,7 +134,7 @@ const EssaysWithOri: NextPage = () => {
           href="https://github.com/pythonicode/essays-with-ori"
           className="grow"
         >
-          <div className="flex flex-row p-4 bg-dark dark:bg-gray-800 rounded gap-4 items-center justify-center w-full">
+          <div className="flex flex-row p-4 bg-dark dark:bg-neutral-800 rounded gap-4 items-center justify-center w-full">
             <FaGithub color="white" size="32px" />
             <h4 className="text-white text-xl font-bold pb-1">
               Source Code on GitHub

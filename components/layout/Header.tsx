@@ -1,4 +1,4 @@
-import NextLink from "next/link";
+import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import MobileMenu from "../core/MobileMenu";
@@ -11,15 +11,15 @@ type NavItemProps = {
 
 function NavItem({ href, text }: NavItemProps) {
   return (
-    <NextLink href={href}>
-      <motion.a
+    <Link href={href}>
+      <motion.div
         whileTap={{ scale: 0.9 }}
-        className="text-gray-500 transition-all duration-300 px-4 py-1 rounded hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 nav-item hidden md:inline-block text-lg cursor-pointer font-bold"
+        className="text-neutral-500 transition-all duration-300 px-4 py-1 rounded hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 nav-item hidden md:inline-block text-lg cursor-pointer font-bold"
         title={text}
       >
         {text}
-      </motion.a>
-    </NextLink>
+      </motion.div>
+    </Link>
   );
 }
 
@@ -40,7 +40,7 @@ export default function Header() {
       <button
         aria-label="Toggle Dark Mode"
         type="button"
-        className="w-9 h-9 bg-gray-200 rounded-lg dark:bg-gray-700 flex items-center justify-center  hover:ring-2 ring-gray-300  transition-all"
+        className="w-8 h-8 bg-neutral-200 rounded-lg dark:bg-neutral-700 flex items-center justify-center  hover:ring-2 ring-neutral-300  transition-all"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       >
         {mounted && (
@@ -49,7 +49,7 @@ export default function Header() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            className="w-5 h-5 text-gray-800 dark:text-gray-200"
+            className="w-5 h-5 text-neutral-800 dark:text-neutral-200"
           >
             {theme === "dark" ? (
               <path

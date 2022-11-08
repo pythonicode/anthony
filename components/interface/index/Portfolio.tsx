@@ -20,29 +20,28 @@ export function PortfolioItem({
 }: ItemProps) {
   return (
     <Link href={link}>
-      <motion.a
+      <motion.div
         initial="initial"
         whileHover="hover"
         whileTap={{ scale: 0.95, rotate: -5 }}
-        className="flex flex-col gap-4 grow cursor-pointer items-center justify-center relative mt-40"
+        className="flex flex-col gap-4 grow cursor-pointer items-center justify-center relative mt-20"
       >
         <motion.div
-          variants={{ hover: { y: -100 } }}
+          variants={{ hover: { y: -40 } }}
           className="absolute -top-20 -z-10"
         >
           <Image
             src={image}
             alt={title}
-            width="200px"
-            height="200px"
+            width={200}
+            height={200}
             className="rounded-xl"
             objectFit="cover"
             objectPosition="center"
           />
         </motion.div>
-        <motion.div
-          variants={{ hover: { scale: 1.05 } }}
-          className="relative flex flex-col border border-gray-200 dark:border-gray-800 p-4 z-10 bg-white dark:bg-dark gap-2 rounded"
+        <div
+          className="relative w-full flex flex-col border-2 border-neutral-200 hover:border-neutral-400 dark:border-neutral-800 dark:hover:border-neutral-700 p-4 z-10 bg-white dark:bg-dark gap-2 rounded transition-all duration-500"
         >
           <h3 className="font-bold text-3xl">{title}</h3>
           <div className="flex flex-row items-center gap-2">
@@ -54,9 +53,9 @@ export function PortfolioItem({
               )
             )}
           </div>
-          <p className="text-gray-500">{description}</p>
-        </motion.div>
-      </motion.a>
+          <p className="text-neutral-500">{description}</p>
+        </div>
+      </motion.div>
     </Link>
   );
 }

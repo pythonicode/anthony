@@ -8,9 +8,9 @@ import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ResponsiveImage from "@/components/core/ResponsiveImage";
-import { getDate, getDateFromString } from "@/lib/date";
+import { getDateFromString } from "@/lib/date";
 import { calculateReadingLength } from "@/lib/core";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 type Post = {
   slug: string;
@@ -23,17 +23,23 @@ type Props = {
 };
 
 const Post: FC<{ post: Post }> = ({ post }) => {
+  const [date, setDate] = useState<string | undefined>();
+
+  useEffect(() => {
+    setDate(getDateFromString(post.frontmatter.date));
+  }, []);
+
   return (
     <Link href={`/posts/${post.slug}`}>
       <motion.div
         initial="initial"
         whileHover="hover"
         whileTap={{ scale: 0.95 }}
-        className="flex flex-col md:flex-row my-4 gap-8 md:h-40 cursor-pointer transition hover:bg-gray-100  dark:hover:bg-gray-800 w-full p-4 rounded"
+        className="flex flex-col md:flex-row my-4 gap-8 md:h-40 cursor-pointer transition hover:bg-neutral-100  dark:hover:bg-neutral-800 w-full p-4 rounded"
       >
         <motion.div
-          variants={{ hover: { rotate: -2, scale: 1.05 } }}
-          className="relative w-full md:w-[unset] h-[unset] md:h-full aspect-video md:aspect-square bg-gray-500 rounded"
+          variants={{ hover: { rotate: -2 } }}
+          className="relative w-full md:w-[unset] h-[unset] md:h-full aspect-video md:aspect-square bg-neutral-500 rounded"
         >
           <Image
             src={post.frontmatter.image}
@@ -44,37 +50,36 @@ const Post: FC<{ post: Post }> = ({ post }) => {
             className="rounded"
           />
         </motion.div>
-        <motion.div
-          variants={{ hover: { scale: 1.01 } }}
+        <div
           className="flex flex-col grow min-w-0 justify-between"
         >
           <h3 className="text-xl md:text-3xl font-bold mb-2 whitespace-nowrap overflow-hidden">
             {post.frontmatter.title}
           </h3>
-          <p className="text-gray-500 text-sm md:max-h-[2.5rem] overflow-hidden">
+          <p className="text-neutral-500 dark:text-neutral-400 text-sm md:max-h-[2.5rem] overflow-hidden">
             {post.frontmatter.description
               ? post.frontmatter.description.length < 164
                 ? post.frontmatter.description
                 : post.frontmatter.description.slice(0, 164) + "..."
               : post.content.length < 164
-              ? post.content
-              : post.content.slice(0, 164) + "..."}
+                ? post.content
+                : post.content.slice(0, 164) + "..."}
           </p>
           <div className="flex flex-row py-1 mt-2 justify-between items-center gap-4">
             <div className="flex flex-row gap-2 grow whitespace-nowrap overflow-hidden">
-              <p>{getDateFromString(post.frontmatter.date)}</p>
-              <p>&bull;</p>
-              <p>{`${calculateReadingLength(post.content)} minute read`}</p>
+              {date ? <div>{date}</div>
+                : <div>Unknown Date</div>}
+              <div>&bull;</div>
+              <div>{`${calculateReadingLength(post.content)} minute read`}</div>
               {post.frontmatter.tags && (
                 <>
-                  <p>&bull;</p>
-                  <p>{post.frontmatter.tags[0]}</p>
+                  <div>&bull;</div>
+                  <div>{post.frontmatter.tags[0]}</div>
                 </>
               )}
             </div>
-            <a className="whitespace-nowrap text-blue-500">Read More</a>
           </div>
-        </motion.div>
+        </div>
       </motion.div>
     </Link>
   );
@@ -97,7 +102,7 @@ const Posts: NextPage<Props> = ({ posts }) => {
     <Layout>
       <ResponsiveImage
         src="/images/blog/home.jpg"
-        alt="Blog Home Page Action Shot"
+        alt="Blog Action Shot"
       />
       <div className="relative w-full mb-8">
         <input
@@ -105,10 +110,10 @@ const Posts: NextPage<Props> = ({ posts }) => {
           type="text"
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search"
-          className="block w-full px-4 py-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:border-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100"
+          className="block w-full px-4 py-2 text-neutral-900 bg-white border border-neutral-200 rounded-md dark:border-neutral-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-neutral-800 dark:text-neutral-100"
         />
         <svg
-          className="absolute w-5 h-5 text-gray-400 right-3 top-3 dark:text-gray-300"
+          className="absolute w-5 h-5 text-neutral-400 right-3 top-3 dark:text-neutral-300"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -132,11 +137,9 @@ const Posts: NextPage<Props> = ({ posts }) => {
           <Post key={i} post={post} />
         ))}
       <Link href="/posts/archive">
-        <a>
-          <div className="text-center text-gray-500 my-8">
-            Click Here for Archived Posts
-          </div>
-        </a>
+        <div className="text-center text-neutral-500 my-8">
+          Click Here for Archived Posts
+        </div>
       </Link>
     </Layout>
   );

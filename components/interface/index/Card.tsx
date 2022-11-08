@@ -70,8 +70,8 @@ const textMotion = {
     },
   },
   hover: {
-    rotate: -95,
-    x: -210,
+    rotate: -90,
+    x: -225,
     y: -100,
     transition: {
       duration: 0.5,
@@ -90,8 +90,8 @@ const textMotion2 = {
     },
   },
   hover: {
-    rotate: 85,
-    x: 220,
+    rotate: 90,
+    x: 225,
     y: -80,
     transition: {
       duration: 0.5,
@@ -120,7 +120,6 @@ const paragraphMotion = {
 };
 
 export default function Card({
-  children,
   index,
   image,
   href = "",
@@ -156,25 +155,24 @@ export default function Card({
           </motion.div>
           <motion.h3
             variants={index == 0 ? textMotion : textMotion2}
-            className="text-xl md:text-2xl font-bold my-4 text-transparent bg-clip-text dark:bg-gradient-to-b dark:from-orange-500 dark:to-yellow-500 bg-gradient-to-b from-black to-black whitespace-nowrap overflow-x-hidden"
+            className="text-xl md:text-2xl font-bold my-4 text-transparent bg-clip-text dark:bg-gradient-to-b dark:from-orange-400 dark:to-yellow-400 bg-gradient-to-b from-black to-black overflow-x-hidden"
           >
             {title}
           </motion.h3>
           <motion.p
             variants={paragraphMotion}
-            className="my-2 text-gray-500 dark:group-hover:text-white group-hover:text-black transition-colors"
+            className="mb-2 text-neutral-500 dark:text-neutral-400 dark:group-hover:text-white group-hover:text-black transition-colors"
           >
             {description}
           </motion.p>
-          <div className="flex flex-row justify-between mb-4">
+          {minutes && data && !loading ? <div className="flex flex-row justify-between mb-4">
             <p>{minutes ? minutes + " minute read" : ""}</p>
-            {!loading && (
-              <div className="flex flex-row items-center justify-center gap-2">
-                <FiEye />
-                <p>{data ? data.views : "No Views"}</p>
-              </div>
-            )}
-          </div>
+            <div className="flex flex-row items-center justify-center gap-2">
+              <FiEye />
+              <p>{data.views}</p>
+            </div>
+          </div> : <div className="flex flex-row justify-between h-4 mt-2 mb-4 bg-neutral-300 dark:bg-neutral-700 animate-pulse rounded" />
+          }
         </div>
       </motion.a>
     </Link>

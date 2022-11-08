@@ -26,11 +26,11 @@ export default function Subscribe() {
     setTimeout(() => setMessage(""), 5000);
   };
   return (
-    <div className="w-full mt-16 p-4 md:p-8 border border-gray-500 rounded-xl transition-all hover:border-black dark:hover:border-white">
+    <div className="w-full mt-16 p-4 md:p-8 border border-neutral-500 rounded-xl transition-all hover:border-black dark:hover:border-white">
       <h3 className="md:text-xl font-bold text-center md:text-left">
         Subscribe to my Newsletter
       </h3>
-      <p className="text-gray-500 text-center md:text-left my-1 text-sm md:text-base">
+      <p className="text-neutral-500 text-center md:text-left my-1 text-sm md:text-base">
         No spam or advertisements, just new and exclusive content straight to
         your inbox.
       </p>
@@ -45,10 +45,10 @@ export default function Subscribe() {
           autoComplete="email"
           onChange={(e) => setEmail(e.currentTarget.value)}
           required
-          className="px-4 py-2 focus:ring-blue-500 focus:border-blue-500 block w-full border-gray-300 rounded-md bg-light dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+          className="px-4 py-2 focus:ring-blue-500 focus:border-blue-500 block w-full border-neutral-300 rounded-md bg-light dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
         />
         <button
-          className="flex items-center justify-center w-full md:absolute md:right-1 md:top-1 h-8 bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded md:w-28"
+          className="flex items-center justify-center w-full md:absolute md:right-1 md:top-1 h-8 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-900 dark:text-neutral-100 rounded md:w-28 transition-colors"
           type="submit"
           disabled={loading}
         >

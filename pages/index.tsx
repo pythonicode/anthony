@@ -9,8 +9,9 @@ import { read } from "to-vfile";
 import { matter, VFile } from "vfile-matter";
 import fs from "fs";
 import { admin } from "@/lib/firebase-admin";
-import ProgressBar from "@/components/interface/blog/ProgressBar";
 import Portfolio from "@/components/interface/index/Portfolio";
+import Resume from "@/components/interface/index/Resume";
+import Typed from 'react-typed';
 
 type Post = {
   slug: string;
@@ -34,6 +35,7 @@ const Home: NextPage<Props> = ({ posts, mostViews }) => {
       <Welcome />
       <Featured posts={[topPost!, recentPost]} />
       <Portfolio />
+      <Resume />
       <Subscribe />
     </Layout>
   );

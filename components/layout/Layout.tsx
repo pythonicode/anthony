@@ -8,6 +8,7 @@ import { useTheme } from "next-themes";
 import { Fade } from "react-awesome-reveal";
 import House from "../three/House";
 import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 
 type LayoutProps = {
   children: ReactNode;
@@ -65,13 +66,13 @@ export default function Layout({
               camera={{
                 position: [-6, 7, 7],
               }}
-              className="w-full h-full"
             >
-              <ambientLight />
-              <pointLight position={[10, 10, 10]} />
-              <mesh recieveShadow={true}>
-                <boxGeometry args={[10, 10, 10]} />
-                <meshPhysicalMaterial color="gray" />
+              <OrbitControls enableZoom={false} />
+              <ambientLight intensity={0.25} />
+              <directionalLight intensity={1} position={[10, 10, 10]} />
+              <mesh rotation={[90, 0, 20]}>
+                <boxBufferGeometry attach="geometry" args={[10, 10, 10]} />
+                <meshLambertMaterial attach="material" color="gray" />
               </mesh>
             </Canvas> */}
           </div>

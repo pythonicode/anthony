@@ -1,5 +1,5 @@
 import Title from "@/components/typography/Title";
-import { motion } from "framer-motion";
+import { useMobile } from "@/lib/core";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +13,7 @@ function PerformLogo({ className }: { className?: string }) {
 }
 
 function AppleLogo({ className }: { className?: string }) {
-    const { theme, setTheme } = useTheme();
+    const { theme } = useTheme();
     return (
         <svg viewBox="0 0 814 1000" xmlns="http://www.w3.org/2000/svg" className={className}>
             <path fill={theme == "light" ? "#000" : "#FFF"} d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105.6-57-155.5-127C46.7 790.7 0 663 0 541.8c0-194.4 126.4-297.5 250.8-297.5 66.1 0 121.2 43.4 162.7 43.4 39.5 0 101.1-46 176.3-46 28.5 0 130.9 2.6 198.3 99.2zm-234-181.5c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-71.3z" />
@@ -45,14 +45,19 @@ type ExperienceProps = {
 }
 
 function Experience({ href, logo, company, role, start, end, desc = "" }: ExperienceProps) {
+    const mobile = useMobile();
     return <div className="p-2 md:p-4 flex items-center flex-col md:flex-row gap-4 md:gap-8">
         <Link href={href}>
             {logo}
         </Link>
         <div className="flex flex-col items-center md:items-start">
             <h3 className="text-xl md:text-2xl font-bold">{company}</h3>
-            <div className="text-neutral-500 font-bold text-sm">{role} | {start} &rarr; {end}</div>
-            <div>{desc}</div>
+            <div className="flex flex-col md:flex-row text-neutral-500 font-bold text-sm items-center my-4 md:my-0">
+                <div>{role}</div>
+                {!mobile && <div>&nbsp;|&nbsp;</div>}
+                <div>{start} &rarr; {end}</div>
+            </div>
+            <div className="text-center md:text-left">{desc}</div>
         </div>
     </div >
 }
@@ -65,14 +70,18 @@ export default function Resume() {
             </Title>
             <h2 className="text-xl font-semibold mb-4">Experience</h2>
             <div className="w-full grid grid-cols-1 items-center gap-10 relative">
-                <Experience href="https://joinperform.com/" logo={<PerformLogo className="w-20 h-20" />} company="Perform Inc." role="Software Contractor" start="September 2022" end="Current" desc="Modeling training plans as a constraint satisfaction problem using Google's ORTools to easily onboard hundreds of new customers." />
+                <Experience href="https://joinperform.com/" logo={<PerformLogo className="w-20 h-20" />} company="Perform Inc." role="Software Contractor" start="September 2022" end="November 2022" desc="Modeling training plans as a constraint satisfaction problem using Google's ORTools to easily onboard hundreds of new customers." />
                 <Experience href="https://www.apple.com/" logo={<AppleLogo className="w-20 h-20" />} company="Apple" role="Software Intern" start="June 2022" end="September 2022" desc="Protoyping new features using Nearby Interaction ultra-wideband API alongside Swift mobile app development." />
             </div>
             <h2 className="text-xl font-semibold my-4">Education</h2>
             <div className="w-full grid grid-cols-1 items-center gap-10 relative">
                 <Experience href="https://www.stanford.edu/" logo={<StanfordLogo className="w-20 h-20" />} company="Stanford University" role="Computer Science" start="September 2019" end="June 2024" desc="Advised by Jerry Cain focusing on systems development and also attaining a minor in electrical engineering." />
             </div>
-
+            <h2 className="text-xl font-semibold my-4">References</h2>
+            <div className="w-full grid grid-cols-1 items-center gap-10 relative">
+                <Experience href="https://profiles.stanford.edu/gerald-cain/" logo={<div className="relative w-20 h-20"><Image src="/images/resume/jerry.jpg" layout="fill" className="rounded-xl" /></div>} company="Jerry Cain" role="Senior Lecturer" start="jerry@cs.stanford.edu" end="(415) 205 2242" desc="Stanford faculty advisor. Ex-Facebook Senior Employee and senior lecturer for systems classes at Stanford." />
+                <Experience href="https://www.linkedin.com/in/alexscammon/" logo={<div className="relative w-20 h-20"><Image src="/images/resume/alexscammon.jpg" layout="fill" className="rounded-xl" /></div>} company="Alex Scammon" role="Head of Open Source Development" start="alexscammon@gmail.com" end="" desc="Faculty advisor. Ex-Facebook Senior Employee and senior lecturer for systems classes at Stanford." />
+            </div>
         </>
     );
 }

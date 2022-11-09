@@ -1,14 +1,9 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import NextLink from "next/link";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { useTheme } from "next-themes";
 import { Fade } from "react-awesome-reveal";
-import House from "../three/House";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 
 type LayoutProps = {
   children: ReactNode;

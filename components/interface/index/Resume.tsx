@@ -1,5 +1,6 @@
 import Title from "@/components/typography/Title";
 import { useMobile } from "@/lib/core";
+import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -48,7 +49,9 @@ function Experience({ href, logo, company, role, start, end, desc = "" }: Experi
     const mobile = useMobile();
     return <div className="p-2 md:p-4 flex items-center flex-col md:flex-row gap-4 md:gap-8">
         <Link href={href}>
-            {logo}
+            <motion.div whileHover={{ rotate: 5 }}>
+                {logo}
+            </motion.div>
         </Link>
         <div className="flex flex-col items-center md:items-start">
             <h3 className="text-xl md:text-2xl font-bold">{company}</h3>
@@ -79,8 +82,8 @@ export default function Resume() {
             </div>
             <h2 className="text-xl font-semibold my-4">References</h2>
             <div className="w-full grid grid-cols-1 items-center gap-10 relative">
-                <Experience href="https://profiles.stanford.edu/gerald-cain/" logo={<div className="relative w-20 h-20"><Image src="/images/resume/jerry.jpg" layout="fill" className="rounded-xl" /></div>} company="Jerry Cain" role="Senior Lecturer" start="jerry@cs.stanford.edu" end="(415) 205 2242" desc="Stanford faculty advisor. Ex-Facebook Senior Employee and senior lecturer for systems classes at Stanford." />
-                <Experience href="https://www.linkedin.com/in/alexscammon/" logo={<div className="relative w-20 h-20"><Image src="/images/resume/alexscammon.jpg" layout="fill" className="rounded-xl" /></div>} company="Alex Scammon" role="Head of Open Source Development" start="alexscammon@gmail.com" end="" desc="Faculty advisor. Ex-Facebook Senior Employee and senior lecturer for systems classes at Stanford." />
+                <Experience href="https://profiles.stanford.edu/gerald-cain/" logo={<div className="relative w-20 h-20"><Image src="/images/resume/jerry.jpg" alt="Jerry Cain" layout="fill" className="rounded-xl" /></div>} company="Jerry Cain" role="Senior Lecturer" start="jerry@cs.stanford.edu" end="(415) 205 2242" desc="Stanford faculty advisor. Ex-Facebook Senior Employee and senior lecturer for systems classes at Stanford." />
+                <Experience href="https://www.linkedin.com/in/alexscammon/" logo={<div className="relative w-20 h-20"><Image src="/images/resume/alexscammon.jpg" alt="Alex Scammon" layout="fill" className="rounded-xl" /></div>} company="Alex Scammon" role="Head of Open Source Development" start="alexscammon@gmail.com" end="" desc="Faculty advisor. Ex-Facebook Senior Employee and senior lecturer for systems classes at Stanford." />
             </div>
         </>
     );

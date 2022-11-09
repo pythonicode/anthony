@@ -11,7 +11,6 @@ import fs from "fs";
 import { admin } from "@/lib/firebase-admin";
 import Portfolio from "@/components/interface/index/Portfolio";
 import Resume from "@/components/interface/index/Resume";
-import Typed from 'react-typed';
 
 type Post = {
   slug: string;

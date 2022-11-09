@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import ReactTyped from "react-typed";
 
 const borderAnimation = {
   rest: {
@@ -39,9 +40,9 @@ export default function Welcome() {
   return (
     <div className="flex flex-col-reverse justify-between items-center md:flex-row">
       <div className="grow">
-        <h1 className="text-3xl md:text-5xl font-bold text-center md:text-left">
-          Anthony Riley
-        </h1>
+        <div className="h-12 flex items-center">
+          <ReactTyped strings={["Anthony Riley"]} className="text-3xl md:text-5xl font-bold text-center md:text-left" typeSpeed={80} backSpeed={50} backDelay={5000} loop />
+        </div>
         <div className="flex flex-row gap-2 my-4 justify-center md:justify-start">
           <h3>{age}</h3>
           <h3>&bull;</h3>
@@ -51,10 +52,9 @@ export default function Welcome() {
           <h3>&bull;</h3>
           <h3>Entrepreneur</h3>
         </div>
-        <p className="text-neutral-500 dark:text-neutral-400 text-center md:text-left">
-          Welcome to my website! Here you can find all information related to my
-          work including blog posts, code snippets and other content.
-        </p>
+        <div className=" text-neutral-500 dark:text-neutral-400 text-center md:text-left">
+          Welcome to my website! Here you can find all information related to my work including blog posts, code snippets and other content.
+        </div>
       </div>
       <motion.div
         initial="rest"

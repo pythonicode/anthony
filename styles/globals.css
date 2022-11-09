@@ -12,6 +12,11 @@
   --foreground: #f0f0f0;
 }
 
+[data-theme="dark"] [data-hide-on-theme="dark"],
+[data-theme="light"] [data-hide-on-theme="light"] {
+  display: none;
+}
+
 html,
 body,
 div#next {

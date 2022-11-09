@@ -63,15 +63,21 @@ const Post: NextPage<Props> = ({ slug, source, length }) => {
     getViews().then((views) => setViews(views));
   }, []);
 
+  const [date, setDate] = useState<string>("Unknown Date");
+
+  useEffect(() => {
+    setDate(getDateFromString(source.frontmatter.date));
+  }, []);
+
   return (
     <Layout>
       <article className="relative">
-        <ResponsiveImage src={source.frontmatter.image} alt="Welcome Image" />
+        <ResponsiveImage src={source.frontmatter.image} alt="Welcome Image" priority />
         <h1 className="text-5xl font-bold mb-8">{source.frontmatter.title}</h1>
         <div className="flex flex-row justify-between mb-16 gap-4 items-center text-gray-500 flex-wrap">
           <div className="flex flex-row gap-2">
             <p className="whitespace-nowrap">
-              {getDateFromString(source.frontmatter.date)}
+              {date}
             </p>
             {source.frontmatter.tags && (
               <>

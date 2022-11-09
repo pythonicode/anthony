@@ -70,10 +70,10 @@ export default function Welcome() {
           <Image
             src="/images/anthony.jpg"
             alt="An action shot of Anthony orienteering."
-            layout="responsive"
             height={300}
             width={300}
             className="rounded-full"
+            priority
           />
         </motion.div>
       </motion.div>

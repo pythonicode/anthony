@@ -4,17 +4,27 @@ import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 function PerformLogo({ className }: { className?: string }) {
     return (
         <div className={`bg-white rounded-full`}>
-            <svg viewBox="0 0 40 40" aria-hidden="true" fill="#f34f69" className={className}><path fill-rule="evenodd" clip-rule="evenodd" d="M20 40C31.0457 40 40 31.0449 40 20C40 8.95508 31.0457 0 20 0C8.95435 0 0 8.95508 0 20C0 31.0449 8.95435 40 20 40ZM19.2587 24.8496C23.8959 25.4316 28.1278 22.1465 28.7111 17.5078C29.2944 12.8711 26.0082 8.63867 21.371 8.05664C16.7339 7.47266 12.5018 10.7598 11.9186 15.3965C11.8684 15.7949 11.8468 16.1914 11.8525 16.5898L11.7244 30.2676C11.7222 30.5996 12.0128 30.9023 12.3424 30.9434H17.25C17.6517 30.9941 18.0029 30.6719 17.9873 30.2676L17.7908 25.0898C17.7803 24.8145 18.0465 24.6113 18.3148 24.6758C18.5322 24.7285 18.7532 24.7734 18.9775 24.8086L19.2587 24.8496ZM17.9625 15.2988L22.3359 13.1816C22.7366 12.9883 23.0323 13.4258 22.7621 13.8125L21.6823 15.3613C21.3961 15.7715 21.4967 16.3359 21.9071 16.623L22.7935 17.2402C23.0515 17.4199 22.954 17.8848 22.6239 18.0449L18.2504 20.1621C18.0419 20.2637 17.8617 20.1934 17.775 20.0488C17.6952 19.9141 17.6947 19.7168 17.8243 19.5312L18.9042 17.9824C19.1903 17.5723 19.0896 17.0078 18.6793 16.7207L17.793 16.1035C17.5352 15.9238 17.6327 15.459 17.9625 15.2988Z"></path></svg>
+            <svg viewBox="0 0 40 40" aria-hidden="true" fill="#f34f69" className={className}><path fillRule="evenodd" clipRule="evenodd" d="M20 40C31.0457 40 40 31.0449 40 20C40 8.95508 31.0457 0 20 0C8.95435 0 0 8.95508 0 20C0 31.0449 8.95435 40 20 40ZM19.2587 24.8496C23.8959 25.4316 28.1278 22.1465 28.7111 17.5078C29.2944 12.8711 26.0082 8.63867 21.371 8.05664C16.7339 7.47266 12.5018 10.7598 11.9186 15.3965C11.8684 15.7949 11.8468 16.1914 11.8525 16.5898L11.7244 30.2676C11.7222 30.5996 12.0128 30.9023 12.3424 30.9434H17.25C17.6517 30.9941 18.0029 30.6719 17.9873 30.2676L17.7908 25.0898C17.7803 24.8145 18.0465 24.6113 18.3148 24.6758C18.5322 24.7285 18.7532 24.7734 18.9775 24.8086L19.2587 24.8496ZM17.9625 15.2988L22.3359 13.1816C22.7366 12.9883 23.0323 13.4258 22.7621 13.8125L21.6823 15.3613C21.3961 15.7715 21.4967 16.3359 21.9071 16.623L22.7935 17.2402C23.0515 17.4199 22.954 17.8848 22.6239 18.0449L18.2504 20.1621C18.0419 20.2637 17.8617 20.1934 17.775 20.0488C17.6952 19.9141 17.6947 19.7168 17.8243 19.5312L18.9042 17.9824C19.1903 17.5723 19.0896 17.0078 18.6793 16.7207L17.793 16.1035C17.5352 15.9238 17.6327 15.459 17.9625 15.2988Z"></path></svg>
         </div>
     )
 }
 
 function AppleLogo({ className }: { className?: string }) {
-    const { theme } = useTheme();
+    const [mounted, setMounted] = useState(false)
+    const { theme, setTheme } = useTheme()
+
+    // useEffect only runs on the client, so now we can safely show the UI
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) return <div className="w-20 h-20 pulse bg-neutral-500" />
+
     return (
         <svg viewBox="0 0 814 1000" xmlns="http://www.w3.org/2000/svg" className={className}>
             <path fill={theme == "light" ? "#000" : "#FFF"} d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105.6-57-155.5-127C46.7 790.7 0 663 0 541.8c0-194.4 126.4-297.5 250.8-297.5 66.1 0 121.2 43.4 162.7 43.4 39.5 0 101.1-46 176.3-46 28.5 0 130.9 2.6 198.3 99.2zm-234-181.5c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-71.3z" />
@@ -82,8 +92,8 @@ export default function Resume() {
             </div>
             <h2 className="text-xl font-semibold my-4">References</h2>
             <div className="w-full grid grid-cols-1 items-center gap-10 relative">
-                <Experience href="https://profiles.stanford.edu/gerald-cain/" logo={<div className="relative w-20 h-20"><Image src="/images/resume/jerry.jpg" alt="Jerry Cain" layout="fill" className="rounded-xl" /></div>} company="Jerry Cain" role="Senior Lecturer" start="jerry@cs.stanford.edu" end="(415) 205 2242" desc="Stanford faculty advisor. Ex-Facebook Senior Employee and senior lecturer for systems classes at Stanford." />
-                <Experience href="https://www.linkedin.com/in/alexscammon/" logo={<div className="relative w-20 h-20"><Image src="/images/resume/alexscammon.jpg" alt="Alex Scammon" layout="fill" className="rounded-xl" /></div>} company="Alex Scammon" role="Head of Open Source Development" start="alexscammon@gmail.com" end="" desc="Faculty advisor. Ex-Facebook Senior Employee and senior lecturer for systems classes at Stanford." />
+                <Experience href="https://profiles.stanford.edu/gerald-cain/" logo={<Image src="/images/resume/jerry.jpg" alt="Jerry Cain" width={80} height={80} className="rounded-xl" />} company="Jerry Cain" role="Senior Lecturer" start="jerry@cs.stanford.edu" end="(415) 205 2242" desc="Stanford faculty advisor. Ex-Facebook Senior Employee and senior lecturer for systems classes at Stanford." />
+                <Experience href="https://www.linkedin.com/in/alexscammon/" logo={<Image src="/images/resume/alexscammon.jpg" alt="Alex Scammon" width={80} height={80} className="rounded-xl" />} company="Alex Scammon" role="Head of Open Source Development" start="alexscammon@gmail.com" end="" desc="Faculty advisor. Ex-Facebook Senior Employee and senior lecturer for systems classes at Stanford." />
             </div>
         </>
     );

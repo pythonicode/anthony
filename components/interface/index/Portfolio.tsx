@@ -35,9 +35,8 @@ export function PortfolioItem({
             alt={title}
             width={200}
             height={200}
+            style={{ width: "200", height: "200" }}
             className="rounded-xl"
-            objectFit="cover"
-            objectPosition="center"
           />
         </motion.div>
         <div

@@ -44,10 +44,8 @@ const Post: FC<{ post: Post }> = ({ post }) => {
           <Image
             src={post.frontmatter.image}
             alt="Blog Post Featured Image"
-            layout="fill"
-            objectPosition="center"
-            objectFit="cover"
-            className="rounded"
+            fill
+            className="rounded object-center object-cover"
           />
         </motion.div>
         <div
@@ -103,6 +101,7 @@ const Posts: NextPage<Props> = ({ posts }) => {
       <ResponsiveImage
         src="/images/blog/home.jpg"
         alt="Blog Action Shot"
+        priority
       />
       <div className="relative w-full mb-8">
         <input

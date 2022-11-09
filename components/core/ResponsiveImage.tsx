@@ -5,6 +5,7 @@ type Props = {
   alt: string;
   width?: string;
   square?: boolean;
+  priority?: boolean;
 };
 
 export default function ResponsiveImage({
@@ -12,6 +13,7 @@ export default function ResponsiveImage({
   alt,
   width = "100%",
   square = false,
+  priority = false,
 }: Props) {
 
   return (
@@ -24,10 +26,9 @@ export default function ResponsiveImage({
           <Image
             src={src}
             alt={alt}
-            layout="fill"
-            objectPosition="center"
-            objectFit="cover"
-            className="rounded"
+            fill
+            className="rounded object-center object-cover"
+            priority={priority}
           />
         )}
       </div>

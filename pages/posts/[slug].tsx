@@ -70,7 +70,7 @@ const Post: NextPage<Props> = ({ slug, source, length }) => {
   }, []);
 
   return (
-    <Layout>
+    <Layout title={`Anthony Riley | ${source.frontmatter.title}`}>
       <article className="relative">
         <ResponsiveImage src={source.frontmatter.image} alt="Welcome Image" priority />
         <h1 className="text-5xl font-bold mb-8">{source.frontmatter.title}</h1>

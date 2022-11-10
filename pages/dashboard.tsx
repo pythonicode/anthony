@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 
 const Dashboard: NextPage = () => {
   return (
-    <Layout>
+    <Layout title="Anthony Riley | Dashboard">
       <NotFinished />
     </Layout>
   );

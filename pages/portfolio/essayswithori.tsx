@@ -12,7 +12,7 @@ const EssaysWithOri: NextPage = () => {
   const { theme } = useTheme();
 
   return (
-    <Layout>
+    <Layout title="Anthony Riley | Essays with Ori">
       {theme == "light" ? (
         <Image
           src="/images/portfolio/essayswithori/landing_light.png"

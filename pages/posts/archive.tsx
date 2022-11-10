@@ -14,7 +14,7 @@ type Props = {
 
 const Archive: NextPage<Props> = ({ posts }) => {
   return (
-    <Layout>
+    <Layout title="Anthony Riley | Archive">
       <h2 className="text-5xl font-bold mb-4">Archived Posts</h2>
       <h4 className="text-neutral-500 mb-8">
         Here is a list of all my old posts. Links redirect to a WordPress blog.

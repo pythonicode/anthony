@@ -9,7 +9,7 @@ import Title from "@/components/typography/Title";
 
 const Discharge: NextPage = () => {
   return (
-    <Layout>
+    <Layout title="Anthony Riley | Discharge">
       <div className="flex flex-col md:flex-row gap-8">
         <motion.img
           animate={{

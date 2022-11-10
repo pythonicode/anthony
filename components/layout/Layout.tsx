@@ -23,7 +23,7 @@ export default function Layout({
   const metadata = {
     title: title
       ? title
-      : "Anthony Riley | athlete, programmer and entrepreneur.",
+      : "Anthony Riley | Welcome",
     description: description ? description : "This page has no description.",
   };
 

@@ -97,7 +97,7 @@ const Posts: NextPage<Props> = ({ posts }) => {
   );
 
   return (
-    <Layout>
+    <Layout title="Anthony Riley | Posts">
       <ResponsiveImage
         src="/images/blog/home.jpg"
         alt="Blog Action Shot"

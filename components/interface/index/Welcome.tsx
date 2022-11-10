@@ -40,7 +40,7 @@ export default function Welcome() {
   return (
     <div className="flex flex-col-reverse justify-between items-center md:flex-row">
       <div className="grow">
-        <div className="h-12 flex items-center">
+        <div className="h-12 flex flex-col md:flex-row items-center">
           <ReactTyped strings={["Anthony Riley"]} className="text-3xl md:text-5xl font-bold text-center md:text-left" typeSpeed={80} backSpeed={50} backDelay={5000} loop />
         </div>
         <div className="flex flex-row gap-2 my-4 justify-center md:justify-start">

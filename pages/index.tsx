@@ -26,13 +26,13 @@ type Props = {
 
 const Home: NextPage<Props> = ({ posts, mostViews }) => {
   const sorted = posts.sort((post1, post2) => post2.created - post1.created);
-  const topPost = posts.find((post) => post.slug == mostViews);
+  const topPost = posts.find((post) => post.slug == mostViews)!;
   const recentPost = topPost == sorted[0] ? sorted[1] : sorted[0];
 
   return (
     <Layout>
       <Welcome />
-      <Featured posts={[topPost!, recentPost]} />
+      <Featured posts={[topPost, recentPost]} />
       <Portfolio />
       <Resume />
       <Subscribe />

@@ -3,13 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { FiEye } from "react-icons/fi";
 import { firestore } from "@/lib/firebase";
-import {
-  doc,
-  DocumentData,
-  DocumentReference,
-  getDocFromServer,
-} from "firebase/firestore";
+import { doc } from "firebase/firestore";
 import { motion } from "framer-motion";
+import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
 
 type CardProps = {
   index?: number;
@@ -23,27 +19,7 @@ type CardProps = {
   description: string;
 };
 
-const useDocumentDataOnce = (
-  ref: DocumentReference<DocumentData>
-): [DocumentData | undefined, boolean] => {
-  const [data, setData] = useState<DocumentData | undefined>();
-  const [loading, setLoading] = useState<boolean>(true);
-
-  const getData = async () => {
-    const doc = await getDocFromServer(ref);
-    setData(doc.data());
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  return [data, loading];
-};
-
 export default function Card({
-  index,
   image,
   href = "",
   slug,
@@ -51,7 +27,7 @@ export default function Card({
   title,
   description,
 }: CardProps) {
-  const [data, loading] = useDocumentDataOnce(doc(firestore, "post", slug));
+  const [data, loading, _] = useDocumentDataOnce(doc(firestore, "post", slug));
 
   return (
     <Link href={href} className="grow md:max-w-[50%]">

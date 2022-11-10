@@ -93,7 +93,7 @@ export default function Resume() {
             <h2 className="text-xl font-semibold my-4">References</h2>
             <div className="w-full grid grid-cols-1 items-center gap-10 relative">
                 <Experience href="https://profiles.stanford.edu/gerald-cain/" logo={<Image src="/images/resume/jerry.jpg" alt="Jerry Cain" width={80} height={80} className="rounded-xl" />} company="Jerry Cain" role="Senior Lecturer" start="jerry@cs.stanford.edu" end="(415) 205 2242" desc="Stanford faculty advisor. Ex-Facebook Senior Employee and senior lecturer for systems classes at Stanford." />
-                <Experience href="https://www.linkedin.com/in/alexscammon/" logo={<Image src="/images/resume/alexscammon.jpg" alt="Alex Scammon" width={80} height={80} className="rounded-xl" />} company="Alex Scammon" role="Head of Open Source Development" start="alexscammon@gmail.com" end="" desc="Faculty advisor. Ex-Facebook Senior Employee and senior lecturer for systems classes at Stanford." />
+                <Experience href="https://www.linkedin.com/in/alexscammon/" logo={<Image src="/images/resume/alexscammon.jpg" alt="Alex Scammon" width={80} height={80} className="rounded-xl" />} company="Alex Scammon" role="Head of Open Source Development" start="alexscammon@gmail.com" end="" desc="Worked under Alex as an studio engineer at Soul Graffiti studios in Oakland. Worked together on improvements." />
             </div>
         </>
     );

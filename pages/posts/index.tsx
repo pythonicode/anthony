@@ -51,7 +51,7 @@ const Post: FC<{ post: Post }> = ({ post }) => {
         <div
           className="flex flex-col grow min-w-0 justify-between"
         >
-          <h3 className="text-xl md:text-3xl font-bold mb-2 whitespace-nowrap overflow-hidden">
+          <h3 className="text-xl md:text-2xl font-bold mb-2 whitespace-nowrap overflow-hidden">
             {post.frontmatter.title}
           </h3>
           <p className="text-neutral-500 dark:text-neutral-400 text-sm md:max-h-[2.5rem] overflow-hidden">

@@ -20,7 +20,7 @@ export default function Featured({ posts }: Props) {
   return (
     <>
       <Title color="gold">Featured Posts</Title>
-      <div className="flex flex-col md:flex-row gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {posts.map((post, i) => (
           <Card
             key={i}

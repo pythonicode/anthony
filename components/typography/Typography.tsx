@@ -18,7 +18,7 @@ export default function Typography({
   if (variant == "h1")
     return (
       <div className="flex flex-row items-center my-8">
-        <div className={`${gradients[color]} w-2 h-12 mr-4`} />
+        <div className={`${gradients[color]} w-3 h-12 mr-4`} />
         <h1 className="text-4xl md:text-5xl font-bold">
           {children}
         </h1>

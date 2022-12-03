@@ -10,11 +10,11 @@ import ResponsiveImage from "@/components/core/ResponsiveImage";
 import { MDXRemote } from "next-mdx-remote";
 import Typography from "@/components/typography/Typography";
 import fs, { Dirent } from "fs";
-import { getDate, getDateFromString } from "@/lib/date";
+import { getDateFromString } from "@/lib/date";
 import List from "@/components/typography/List";
 import Link from "next/link";
 import { calculateReadingLength } from "@/lib/core";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProgressBar from "@/components/interface/blog/ProgressBar";
 
 const components = {

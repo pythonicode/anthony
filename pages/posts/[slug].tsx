@@ -29,6 +29,7 @@ const components = {
   a: (props: any) => <a className="text-blue-500" {...props} />,
   ol: (props: any) => <List variant="ordered" {...props} />,
   ul: (props: any) => <List variant="unordered" {...props} />,
+  hr: (props: any) => <hr className="my-8" {...props} />,
   blockquote: (props: any) => (
     <blockquote
       className="border-l-4 border-l-gray-500 pl-4 text-gray-500 rounded"

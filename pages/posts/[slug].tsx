@@ -124,7 +124,7 @@ export const getStaticProps: GetStaticProps = async ({
   }
   const views = response.data && (response.data.length == 0 ? 0 : response.data[0].views);
   if (process.env.NODE_ENV === 'production') {
-    if (response.data[0].published == false) return { notFound: true };
+    // if (response.data[0].published == false) return { notFound: true };
     const { error } = await supabase_admin
       .from('posts')
       .update({ views: views + 1 })

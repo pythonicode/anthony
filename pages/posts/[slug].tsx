@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import ProgressBar from "@/components/interface/blog/ProgressBar";
 import { supabase_admin } from "@/lib/supabase";
 import Title from "@/components/typography/Title";
+import { useRouter } from "next/router";
 
 const components = {
   Link,
@@ -55,13 +56,15 @@ const Post: NextPage<Props> = ({ slug, views, source, length }) => {
     setDate(getDateFromString(source.frontmatter.date));
   }, []);
 
+  const { isFallback } = useRouter();
+
   return (
     <Layout title={`Anthony Riley | ${source.frontmatter.title}`}>
       <article className="relative">
         <ResponsiveImage src={source.frontmatter.image} alt="Welcome Image" priority />
         <h1 className="text-5xl font-bold mb-8">{source.frontmatter.title}</h1>
         <div className="flex flex-row justify-between mb-16 gap-4 items-center text-gray-500 flex-wrap">
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row items-center gap-2">
             <p className="whitespace-nowrap">
               {date}
             </p>
@@ -75,7 +78,10 @@ const Post: NextPage<Props> = ({ slug, views, source, length }) => {
             )}
             <>
               <p>&bull;</p>
-              <p className="whitespace-nowrap">{views} views</p>
+              { isFallback ? 
+                <div className="h-4 w-20 rounded bg-neutral-500 animate-pulse"/> :
+                <p className="whitespace-nowrap">{views} views</p>
+              }
             </>
           </div>
           <p className="whitespace-nowrap">
@@ -138,7 +144,7 @@ export const getStaticProps: GetStaticProps = async ({
       source: serialized,
       length: source.length,
     },
-    revalidate: 60
+    revalidate: 10
   };
 };
 

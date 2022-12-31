@@ -16,6 +16,8 @@ import Link from "next/link";
 import { calculateReadingLength } from "@/lib/core";
 import { useEffect, useState } from "react";
 import ProgressBar from "@/components/interface/blog/ProgressBar";
+import { supabase_admin } from "@/lib/supabase";
+import Title from "@/components/typography/Title";
 
 const components = {
   Link,
@@ -40,29 +42,12 @@ const components = {
 
 type Props = {
   slug: string;
+  views: number;
   source: any;
   length: number;
 };
 
-const Post: NextPage<Props> = ({ slug, source, length }) => {
-  const [views, setViews] = useState<number | undefined>();
-
-  const getViews = async (): Promise<number> => {
-    const response = await fetch(`/api/views/${slug}`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-
-    const { views } = await response.json();
-    return views;
-  };
-
-  useEffect(() => {
-    getViews().then((views) => setViews(views));
-  }, []);
+const Post: NextPage<Props> = ({ slug, views, source, length }) => {
 
   const [date, setDate] = useState<string>("Unknown Date");
 
@@ -88,18 +73,20 @@ const Post: NextPage<Props> = ({ slug, source, length }) => {
                 </p>
               </>
             )}
-            {views && (
-              <>
-                <p>&bull;</p>
-                <p className="whitespace-nowrap">{views} views</p>
-              </>
-            )}
+            <>
+              <p>&bull;</p>
+              <p className="whitespace-nowrap">{views} views</p>
+            </>
           </div>
           <p className="whitespace-nowrap">
             {`${calculateReadingLength(length)} minute read`}
           </p>
         </div>
         <MDXRemote {...source} components={components} />
+        {/* <h1 className="text-5xl font-bold my-8">Discussion</h1>
+        <div className="rounded border border-neutral-500 p-4">
+          
+        </div> */}
         <ProgressBar />
       </article>
     </Layout>
@@ -121,14 +108,37 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
-  const source = fs.readFileSync(`./posts/${params?.slug}.mdx`, "utf8");
+  const slug = params ? params.slug : "";
+  const source = fs.readFileSync(`./posts/${slug}.mdx`, "utf8");
   const serialized = await serialize(source, { parseFrontmatter: true });
+  const response = await supabase_admin
+    .from('posts')
+    .select()
+    .eq('slug', slug);
+  if (response.error) return { notFound: true };
+  if (response.data.length == 0) {
+    const { error } = await supabase_admin
+      .from('posts')
+      .insert({ slug: slug });
+    if (error) return { notFound: true };
+  }
+  const views = response.data && (response.data.length == 0 ? 0 : response.data[0].views);
+  if (process.env.NODE_ENV === 'production') {
+    if (response.data[0].published == false) return { notFound: true };
+    const { error } = await supabase_admin
+      .from('posts')
+      .update({ views: views + 1 })
+      .eq('slug', slug);
+    if (error) return { notFound: true };
+  }
   return {
     props: {
-      slug: params?.slug,
+      slug: slug,
+      views: views,
       source: serialized,
       length: source.length,
     },
+    revalidate: 60
   };
 };
 

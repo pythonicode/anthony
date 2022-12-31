@@ -1,4 +1,4 @@
-import type { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Layout from "@/components/layout/Layout";
 import { matter, VFile } from "vfile-matter";
 import { read } from "to-vfile";
@@ -91,7 +91,7 @@ const Posts: NextPage<Props> = ({ posts }) => {
       post.frontmatter.title
         .toLowerCase()
         .includes(search ? search.toLowerCase() : "") ||
-      post.frontmatter.tags?.some((tag) =>
+      post.frontmatter.tags?.some((tag: string) =>
         tag.toLowerCase().includes(search ? search.toLowerCase() : "")
       )
   );

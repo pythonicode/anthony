@@ -5,34 +5,36 @@ import Layout from "@/components/layout/Layout";
 import { Frontmatter } from "@/lib/types";
 import { Dirent } from "fs";
 import type { GetStaticProps, NextPage } from "next";
-import { read } from "to-vfile";
-import { matter, VFile } from "vfile-matter";
 import fs from "fs";
-import { admin } from "@/lib/firebase-admin";
 import Portfolio from "@/components/interface/index/Portfolio";
 import Resume from "@/components/interface/index/Resume";
+import { supabase_admin } from "@/lib/supabase";
+import { read } from 'gray-matter';
 
 type Post = {
   slug: string;
   frontmatter: Frontmatter;
   content: string;
-  created: number;
+  created_at: string;
 };
 
 type Props = {
-  posts: Array<Post>;
-  mostViews: any;
+  posts: Post[];
 };
 
-const Home: NextPage<Props> = ({ posts, mostViews }) => {
-  const sorted = posts.sort((post1, post2) => post2.created - post1.created);
-  const topPost = posts.find((post) => post.slug == mostViews)!;
-  const recentPost = topPost == sorted[0] ? sorted[1] : sorted[0];
+const Home: NextPage<Props> = ({ posts }) => {
+
+  let seen = new Set();
+
+  const unique = posts.filter((post: Post) => {
+      seen.add(post.slug);
+      return seen.has(post.slug);
+  });
 
   return (
     <Layout>
       <Welcome />
-      <Featured posts={[topPost, recentPost]} />
+      <Featured posts={unique.slice(0, 4)} />
       <Portfolio />
       <Resume />
       <Subscribe />
@@ -42,34 +44,46 @@ const Home: NextPage<Props> = ({ posts, mostViews }) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   // MDX text - can be from a local file, database, anywhere
-  const posts: Array<Post> = [];
   const dir: Dirent[] = fs.readdirSync("./posts", { withFileTypes: true });
-  const mostViews = (
-    await admin
-      .firestore()
-      .collection("post")
-      .orderBy("views", "desc")
-      .limit(1)
-      .get()
-  ).docs[0].id;
-  for (const file of dir) {
-    if (file.isDirectory()) continue;
-    const source: VFile = await read(`./posts/${file.name}`);
-    const content = source.value
-      .toString()
-      .trim()
-      .slice(source.value.toString().trim().indexOf("---", 3) + 3);
-    matter(source, { strip: true });
-    const created = fs.statSync(`./posts/${file.name}`).birthtime;
+  const popular = await supabase_admin
+    .from("posts").select()
+    .order('views', { ascending: false })
+    .limit(3);
+  if (popular.error) return { notFound: true };
 
-    posts.push({
-      slug: file.name.slice(0, file.name.lastIndexOf(".")),
-      frontmatter: source.data.matter as Frontmatter,
-      content: (content.match(/[A-Za-z0-9 _.,!"?']*/g) || []).join(" "),
-      created: created.getTime(),
-    });
+  const latest = await supabase_admin
+    .from("posts").select()
+    .order('created_at', { ascending: false })
+    .limit(3);
+
+  if(latest.error) return { notFound: true };
+
+  const popular_posts = popular.data.map((post) => {
+    const result = read(`./posts/${post.slug}.mdx`);
+    return {
+      slug: post.slug,
+      frontmatter: result.data,
+      content: result.content,
+      created_at: post.created_at,
+    };
+  });
+
+  const latest_posts = latest.data.map((post) => {
+    const result = read(`./posts/${post.slug}.mdx`);
+    return {
+      slug: post.slug,
+      frontmatter: result.data,
+      content: result.content,
+      created_at: post.created_at,
+    };
+  });
+
+  return {
+    props: {
+      posts: [...popular_posts, ...latest_posts]
+    }
   }
-  return { props: { posts, mostViews } };
+
 };
 
 export default Home;

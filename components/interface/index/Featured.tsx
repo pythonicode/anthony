@@ -9,7 +9,7 @@ type Post = {
   slug: string;
   frontmatter: Frontmatter;
   content: string;
-  created: number;
+  created_at: string;
 };
 
 type Props = {
@@ -39,6 +39,7 @@ export default function Featured({ posts }: Props) {
             minutes={calculateReadingLength(post.content)}
             slug={post.slug}
             href={`/posts/${post.slug}`}
+            tags={post.frontmatter.tags}
           />
         ))}
       </div>

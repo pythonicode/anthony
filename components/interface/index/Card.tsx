@@ -1,11 +1,7 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FiEye } from "react-icons/fi";
-import { firestore } from "@/lib/firebase";
-import { doc } from "firebase/firestore";
 import { motion } from "framer-motion";
-import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
 
 type CardProps = {
   index?: number;
@@ -14,9 +10,9 @@ type CardProps = {
   href?: string;
   slug: string;
   minutes?: number;
-  views?: number;
   title: string;
   description: string;
+  tags?: string[];
 };
 
 export default function Card({
@@ -26,19 +22,13 @@ export default function Card({
   minutes,
   title,
   description,
+  tags
 }: CardProps) {
-  const [data, loading, error] = useDocumentDataOnce(doc(firestore, "post", slug));
-
-
-  useEffect(() => {
-    console.log(data, loading, error);
-  }, [data, loading, error]);
-
   return (
     <Link href={href} className="grow">
       <motion.div whileHover="hover" whileTap={{ scale: 0.95 }} className="relative flex flex-col justify-start rounded cursor-pointer transition-all duration-300 w-full h-full group">
         <motion.div
-          variants={{ hover: { rotate: -2 } }}
+          variants={{ hover: { y: -2 } }}
           className="relative rounded aspect-video w-full"
         >
           <Image
@@ -58,17 +48,11 @@ export default function Card({
             <motion.p
               className="mb-2 text-neutral-500 dark:text-neutral-400 dark:group-hover:text-white group-hover:text-black transition-colors"
             >
-              {description}
+              {(description.match(/[A-Za-z0-9 _.,!"?']*/g) || []).join(" ")}
             </motion.p>
-            <div className="flex flex-row justify-between mb-4">
-              {minutes ? <div>{minutes ? minutes + " minute read" : ""}</div> : <div className="w-20 h-full bg-neutral-300 dark:bg-neutral-700 animate-pulse rounded" />}
-              {!loading ?
-                <div className="flex flex-row items-center justify-center gap-2">
-                  <FiEye />
-                  <p>{error || !data ? "No Views" : data.views}</p>
-                </div>
-                : <div className="w-20 h-full bg-neutral-300 dark:bg-neutral-700 animate-pulse rounded" />
-              }
+            <div className="flex flex-row gap-4 justify-between mb-4">
+              {tags ? <div>&rarr; {tags[0]}</div> : <div>&rarr; Uncategorized</div>}
+              {minutes ? <div>{minutes} minute read</div> : null}
             </div>
           </div>
         </div>

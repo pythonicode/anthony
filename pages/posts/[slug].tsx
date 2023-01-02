@@ -17,8 +17,6 @@ import { calculateReadingLength } from "@/lib/core";
 import { useEffect, useState } from "react";
 import ProgressBar from "@/components/interface/blog/ProgressBar";
 import { supabase_admin } from "@/lib/supabase";
-import Title from "@/components/typography/Title";
-import { useRouter } from "next/router";
 import GoogleLogin from "@/components/core/auth/GoogleLogin";
 
 const components = {

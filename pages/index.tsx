@@ -23,19 +23,10 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ posts }) => {
-
-  let seen = new Set();
-
-  const unique = posts.filter((post: Post) => {
-      const has = seen.has(post.slug);
-      seen.add(post.slug);
-      return !has;
-  });
-
   return (
     <Layout>
       <Welcome />
-      <Featured posts={unique.slice(0, 4)} />
+      <Featured posts={posts} />
       <Portfolio />
       <Resume />
       <Subscribe />
@@ -79,8 +70,9 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     };
   });
 
-  const popular_post = popular_posts[Math.floor(Math.random() * popular_posts.length)];
   const latest_post = latest_posts[0];
+  let popular_post = popular_posts[Math.floor(Math.random() * popular_posts.length)];
+  while(popular_post.slug == latest_post.slug) popular_post = popular_posts[Math.floor(Math.random() * popular_posts.length)];
 
   return {
     props: {

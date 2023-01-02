@@ -27,8 +27,9 @@ const Home: NextPage<Props> = ({ posts }) => {
   let seen = new Set();
 
   const unique = posts.filter((post: Post) => {
+      const has = seen.has(post.slug);
       seen.add(post.slug);
-      return seen.has(post.slug);
+      return !has;
   });
 
   return (
@@ -54,7 +55,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   const latest = await supabase_admin
     .from("posts").select()
     .order('created_at', { ascending: false })
-    .limit(3);
+    .limit(1);
 
   if(latest.error) return { notFound: true };
 
@@ -78,9 +79,12 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     };
   });
 
+  const popular_post = popular_posts[Math.floor(Math.random() * popular_posts.length)];
+  const latest_post = latest_posts[0];
+
   return {
     props: {
-      posts: [...popular_posts, ...latest_posts]
+      posts: [popular_post, latest_post]
     }
   }
 

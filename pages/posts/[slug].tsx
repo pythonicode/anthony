@@ -19,6 +19,7 @@ import ProgressBar from "@/components/interface/blog/ProgressBar";
 import { supabase_admin } from "@/lib/supabase";
 import Title from "@/components/typography/Title";
 import { useRouter } from "next/router";
+import GoogleLogin from "@/components/core/auth/GoogleLogin";
 
 const components = {
   Link,
@@ -54,11 +55,11 @@ const Post: NextPage<Props> = ({ slug, source, length }) => {
 
   useEffect(() => {
     fetch(`/api/views/${slug}`)
-    .then(async (res) => {
-      const { views } = await res.json();
-      setViews(views);
-    })
-    .catch((err) => console.error(err));
+      .then(async (res) => {
+        const { views } = await res.json();
+        setViews(views);
+      })
+      .catch((err) => console.error(err));
     setDate(getDateFromString(source.frontmatter.date))
   }, []);
 
@@ -95,7 +96,7 @@ const Post: NextPage<Props> = ({ slug, source, length }) => {
         <MDXRemote {...source} components={components} />
         {/* <h1 className="text-5xl font-bold my-8">Discussion</h1>
         <div className="rounded border border-neutral-500 p-4">
-          
+          <GoogleLogin />
         </div> */}
         <ProgressBar />
       </article>

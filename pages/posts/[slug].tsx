@@ -43,20 +43,24 @@ const components = {
 
 type Props = {
   slug: string;
-  views: number;
   source: any;
   length: number;
 };
 
-const Post: NextPage<Props> = ({ slug, views, source, length }) => {
+const Post: NextPage<Props> = ({ slug, source, length }) => {
 
   const [date, setDate] = useState<string>("Unknown Date");
+  const [views, setViews] = useState<number | undefined>();
 
   useEffect(() => {
-    setDate(getDateFromString(source.frontmatter.date));
+    fetch(`/api/views/${slug}`)
+    .then(async (res) => {
+      const { views } = await res.json();
+      setViews(views);
+    })
+    .catch((err) => console.error(err));
+    setDate(getDateFromString(source.frontmatter.date))
   }, []);
-
-  const { isFallback } = useRouter();
 
   return (
     <Layout title={`Anthony Riley | ${source.frontmatter.title}`}>
@@ -78,9 +82,9 @@ const Post: NextPage<Props> = ({ slug, views, source, length }) => {
             )}
             <>
               <p>&bull;</p>
-              { isFallback ? 
-                <div className="h-4 w-20 rounded bg-neutral-500 animate-pulse"/> :
-                <p className="whitespace-nowrap">{views} views</p>
+              { views != undefined ? 
+                 <p className="whitespace-nowrap">{views} views</p> :
+                 <div className="h-4 w-20 rounded bg-neutral-500 animate-pulse"/>
               }
             </>
           </div>
@@ -117,34 +121,16 @@ export const getStaticProps: GetStaticProps = async ({
   const slug = params ? params.slug : "";
   const source = fs.readFileSync(`./posts/${slug}.mdx`, "utf8");
   const serialized = await serialize(source, { parseFrontmatter: true });
-  const response = await supabase_admin
-    .from('posts')
-    .select()
-    .eq('slug', slug);
-  if (response.error) return { notFound: true };
-  if (response.data.length == 0) {
-    const { error } = await supabase_admin
-      .from('posts')
-      .insert({ slug: slug });
-    if (error) return { notFound: true };
-  }
-  const views = response.data && (response.data.length == 0 ? 0 : response.data[0].views);
-  if (process.env.NODE_ENV === 'production') {
-    // if (response.data[0].published == false) return { notFound: true };
-    const { error } = await supabase_admin
-      .from('posts')
-      .update({ views: views + 1 })
-      .eq('slug', slug);
-    if (error) return { notFound: true };
-  }
+  const { error } = await supabase_admin
+            .from('posts')
+            .insert({ slug: slug });
+  if (error && error.code != "23505") return { notFound: true };
   return {
     props: {
       slug: slug,
-      views: views,
       source: serialized,
       length: source.length,
-    },
-    revalidate: 10
+    }
   };
 };
 

@@ -104,7 +104,7 @@ const Post: NextPage<Props> = ({ slug, source, length }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: Dirent[] = fs
-    .readdirSync("./posts", { withFileTypes: true })
+    .readdirSync("./public/posts", { withFileTypes: true })
     .filter((path) => !path.isDirectory());
   return {
     paths: paths.map((path) => ({
@@ -118,7 +118,7 @@ export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
   const slug = params ? params.slug : "";
-  const source = fs.readFileSync(`./posts/${slug}.mdx`, "utf8");
+  const source = fs.readFileSync(`./public/posts/${slug}.mdx`, "utf8");
   const serialized = await serialize(source, { parseFrontmatter: true });
   const { error } = await supabase_admin
             .from('posts')

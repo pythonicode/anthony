@@ -1,8 +1,6 @@
 import type { GetStaticProps, NextPage } from "next";
 import Layout from "@/components/layout/Layout";
-import { matter, VFile } from "vfile-matter";
-import { read } from "to-vfile";
-import fs, { Dirent } from "fs";
+import fs from "fs";
 import { Frontmatter } from "@/lib/types";
 import { FC, useEffect, useState } from "react";
 import Image from "next/image";
@@ -11,6 +9,7 @@ import ResponsiveImage from "@/components/core/ResponsiveImage";
 import { getDateFromString } from "@/lib/date";
 import { calculateReadingLength } from "@/lib/core";
 import { motion } from "framer-motion";
+import { read } from "gray-matter";
 
 type Post = {
   slug: string;
@@ -145,24 +144,17 @@ const Posts: NextPage<Props> = ({ posts }) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  // MDX text - can be from a local file, database, anywhere
-  const posts: Array<Post> = [];
-  const dir: Dirent[] = fs.readdirSync("./posts", { withFileTypes: true });
-  for (const file of dir) {
-    if (file.isDirectory()) continue;
-    const source: VFile = await read(`./posts/${file.name}`);
-    const content = source.value
-      .toString()
-      .trim()
-      .slice(source.value.toString().trim().indexOf("---", 3) + 3);
-    matter(source, { strip: true });
-    const created = fs.statSync(`./posts/${file.name}`).birthtime;
-    posts.push({
+  const posts = fs.readdirSync("./public/posts", { withFileTypes: true })
+  .filter((item) => !item.isDirectory())
+  .map((file) => {
+    const result = read(`./public/posts/${file.name}`);
+    const created = fs.statSync(`./public/posts/${file.name}`).birthtime;
+    return {
       slug: file.name.slice(0, file.name.lastIndexOf(".")),
-      frontmatter: source.data.matter as Frontmatter,
-      content: (content.match(/[A-Za-z0-9 _.,!"?']*/g) || []).join(" "),
-    });
-  }
+      frontmatter: result.data as Frontmatter,
+      content: (result.content.match(/[A-Za-z0-9 _.,!"?']*/g) || []).join(" "),
+    }
+  });
   return { props: { posts } };
 };
 

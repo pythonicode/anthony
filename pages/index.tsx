@@ -36,8 +36,6 @@ const Home: NextPage<Props> = ({ posts }) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  // MDX text - can be from a local file, database, anywhere
-  const dir: Dirent[] = fs.readdirSync("./posts", { withFileTypes: true });
   const popular = await supabase_admin
     .from("posts").select()
     .order('views', { ascending: false })
@@ -52,7 +50,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   if(latest.error) return { notFound: true };
 
   const popular_posts = popular.data.map((post) => {
-    const result = read(`./posts/${post.slug}.mdx`);
+    const result = read(`./public/posts/${post.slug}.mdx`);
     return {
       slug: post.slug,
       frontmatter: result.data,
@@ -62,7 +60,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   });
 
   const latest_posts = latest.data.map((post) => {
-    const result = read(`./posts/${post.slug}.mdx`);
+    const result = read(`./public/posts/${post.slug}.mdx`);
     return {
       slug: post.slug,
       frontmatter: result.data,

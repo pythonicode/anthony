@@ -23,6 +23,7 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ posts }) => {
+
   return (
     <Layout>
       <Welcome />
@@ -71,8 +72,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   });
 
   const latest_post = latest_posts[0];
-  let popular_post = popular_posts[Math.floor(Math.random() * popular_posts.length)];
-  while(popular_post.slug == latest_post.slug) popular_post = popular_posts[Math.floor(Math.random() * popular_posts.length)];
+  const popular_post = popular_posts.find((post) => post.slug != latest_post.slug)!;
 
   return {
     props: {

@@ -26,7 +26,7 @@ const Post: FC<{ post: Post }> = ({ post }) => {
 
   useEffect(() => {
     setDate(getDateFromString(post.frontmatter.date));
-  }, []);
+  }, [post.frontmatter.date]);
 
   return (
     <Link href={`/posts/${post.slug}`}>

@@ -32,7 +32,7 @@ const Archive: NextPage<Props> = ({ posts }) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const posts = JSON.parse(
-    fs.readFileSync("./posts/archived/info.json").toString()
+    fs.readFileSync("./public/posts/archived/info.json").toString()
   );
   return { props: { posts } };
 };

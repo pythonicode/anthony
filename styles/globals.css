@@ -2,21 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #f0f0f0;
-  --foreground: #121212;
-}
-
-[data-theme="dark"] {
-  --background: #121212;
-  --foreground: #f0f0f0;
-}
-
-[data-theme="dark"] [data-hide-on-theme="dark"],
-[data-theme="light"] [data-hide-on-theme="light"] {
-  display: none;
-}
-
 html,
 body,
 div#next {
@@ -27,6 +12,16 @@ div#next {
   min-width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+html {
+  background-color: #f0f0f0;
+  color:#000;
+}
+
+html.dark {
+  background-color: #121212;
+  color:#fff;
 }
 
 a {

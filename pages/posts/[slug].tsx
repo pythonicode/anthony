@@ -59,7 +59,7 @@ const Post: NextPage<Props> = ({ slug, source, length }) => {
       })
       .catch((err) => console.error(err));
     setDate(getDateFromString(source.frontmatter.date))
-  }, []);
+  }, [slug, source.frontmatter.date]);
 
   return (
     <Layout title={`Anthony Riley | ${source.frontmatter.title}`}>
@@ -83,7 +83,7 @@ const Post: NextPage<Props> = ({ slug, source, length }) => {
               <p>&bull;</p>
               { views != undefined ? 
                  <p className="whitespace-nowrap">{views} views</p> :
-                 <div className="h-4 w-20 rounded bg-neutral-500 animate-pulse"/>
+                 <div className="h-4 w-16 rounded bg-neutral-500 animate-pulse"/>
               }
             </>
           </div>

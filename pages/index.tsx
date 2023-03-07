@@ -3,9 +3,7 @@ import Subscribe from "@/components/interface/index/Subscribe";
 import Welcome from "@/components/interface/index/Welcome";
 import Layout from "@/components/layout/Layout";
 import { Frontmatter } from "@/lib/types";
-import { Dirent } from "fs";
 import type { GetStaticProps, NextPage } from "next";
-import fs from "fs";
 import Portfolio from "@/components/interface/index/Portfolio";
 import Resume from "@/components/interface/index/Resume";
 import { supabase_admin } from "@/lib/supabase";
@@ -47,7 +45,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     .order('created_at', { ascending: false })
     .limit(1);
 
-  if(latest.error) return { notFound: true };
+  if (latest.error) return { notFound: true };
 
   const popular_posts = popular.data.map((post) => {
     const result = read(`./public/posts/${post.slug}.mdx`);

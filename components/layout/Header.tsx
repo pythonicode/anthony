@@ -3,6 +3,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import MobileMenu from "../core/MobileMenu";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 type NavItemProps = {
   href: string;
@@ -10,11 +11,14 @@ type NavItemProps = {
 };
 
 function NavItem({ href, text }: NavItemProps) {
+  const router = useRouter();
+  const isActive = href == "/" ? router.pathname == "/" : router.pathname.startsWith(href);
+
   return (
     <Link href={href}>
       <motion.div
         whileTap={{ scale: 0.9 }}
-        className="text-neutral-500 transition-all duration-300 px-4 py-1 rounded hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 nav-item hidden md:inline-block text-lg cursor-pointer font-bold"
+        className={`${isActive ? "bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white" : ""} text-neutral-500 transition-all duration-300 px-4 py-1 rounded hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 nav-item hidden md:inline-block text-lg cursor-pointer font-semibold`}
         title={text}
       >
         {text}

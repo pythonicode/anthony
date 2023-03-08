@@ -15,13 +15,13 @@ div#next {
 }
 
 html {
-  background-color: #f0f0f0;
-  color:#000;
+  background-color: #ffffff;
+  color: #000;
 }
 
 html.dark {
   background-color: #121212;
-  color:#fff;
+  color: #fff;
 }
 
 a {

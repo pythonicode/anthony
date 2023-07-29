@@ -50,7 +50,7 @@ const Post: FC<{ post: Post }> = ({ post }) => {
         <div
           className="flex flex-col grow min-w-0 justify-between"
         >
-          <h3 className="text-xl md:text-2xl font-bold mb-2 whitespace-nowrap overflow-hidden">
+          <h3 className="text-2xl font-bold mb-2 md:whitespace-nowrap md:overflow-hidden">
             {post.frontmatter.title}
           </h3>
           <p className="text-neutral-500 dark:text-neutral-400 text-sm md:max-h-[2.5rem] overflow-hidden">
@@ -63,7 +63,7 @@ const Post: FC<{ post: Post }> = ({ post }) => {
                 : post.content.slice(0, 164) + "..."}
           </p>
           <div className="flex flex-row py-1 mt-2 justify-between items-center gap-4">
-            <div className="flex flex-row gap-2 grow whitespace-nowrap overflow-hidden">
+            <div className="flex flex-row flex-wrap gap-2 grow md:whitespace-nowrap md:overflow-hidden">
               {date ? <div>{date}</div>
                 : <div>Unknown Date</div>}
               <div>&bull;</div>
@@ -97,11 +97,17 @@ const Posts: NextPage<Props> = ({ posts }) => {
 
   return (
     <Layout title="Anthony Riley | Posts">
-      <ResponsiveImage
-        src="/images/blog/home.jpg"
-        alt="Blog Action Shot"
-        priority
-      />
+      <div
+        className="hidden md:block relative w-full aspect-video bg-gray-500 rounded mb-8"
+      >
+        <Image
+          src="/images/blog/home.jpg"
+          alt="Blog Header"
+          fill
+          className="rounded object-center object-cover"
+          priority
+        />
+      </div>
       <div className="relative w-full mb-8">
         <input
           aria-label="Search"
@@ -145,16 +151,16 @@ const Posts: NextPage<Props> = ({ posts }) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const posts = fs.readdirSync("./public/posts", { withFileTypes: true })
-  .filter((item) => !item.isDirectory())
-  .map((file) => {
-    const result = read(`./public/posts/${file.name}`);
-    const created = fs.statSync(`./public/posts/${file.name}`).birthtime;
-    return {
-      slug: file.name.slice(0, file.name.lastIndexOf(".")),
-      frontmatter: result.data as Frontmatter,
-      content: (result.content.match(/[A-Za-z0-9 _.,!"?']*/g) || []).join(" "),
-    }
-  });
+    .filter((item) => !item.isDirectory())
+    .map((file) => {
+      const result = read(`./public/posts/${file.name}`);
+      const created = fs.statSync(`./public/posts/${file.name}`).birthtime;
+      return {
+        slug: file.name.slice(0, file.name.lastIndexOf(".")),
+        frontmatter: result.data as Frontmatter,
+        content: (result.content.match(/[A-Za-z0-9 _.,!"?']*/g) || []).join(" "),
+      }
+    });
   return { props: { posts } };
 };
 

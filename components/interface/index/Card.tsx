@@ -28,7 +28,7 @@ export default function Card({
     <Link href={href} className="grow">
       <motion.div whileHover="hover" whileTap={{ scale: 0.95 }} className="relative flex flex-col justify-start rounded cursor-pointer transition-all duration-300 w-full h-full group">
         <motion.div
-          variants={{ hover: { y: -2 } }}
+          variants={{ hover: { scale: 1.02 } }}
           className="relative rounded aspect-video w-full"
         >
           <Image
@@ -40,7 +40,7 @@ export default function Card({
         </motion.div>
         <div className="flex flex-col justify-between grow">
           <h3
-            className="text-xl md:text-2xl font-bold my-4 text-transparent bg-clip-text dark:bg-gradient-to-b dark:from-orange-400 dark:to-yellow-400 bg-gradient-to-b from-black to-black overflow-hidden"
+            className="text-xl md:text-2xl font-bold mt-4 mb-2 text-transparent bg-clip-text dark:bg-gradient-to-b dark:from-orange-400 dark:to-yellow-400 bg-gradient-to-b from-black to-black overflow-hidden"
           >
             {title}
           </h3>

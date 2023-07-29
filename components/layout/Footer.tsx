@@ -19,10 +19,10 @@ const ExternalLink = ({ href, children }: ExternalLinkProps) => (
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col justify-center items-start max-w-3xl mx-auto w-full mb-8 p-8">
+    <footer className="flex flex-col justify-center items-center max-w-3xl mx-auto w-full mb-8 p-8">
       <hr className="w-full border-1 border-neutral-200 dark:border-neutral-800 mb-8" />
       <div className="w-full max-w-2xl grid gap-4 pb-16 grid-cols-3">
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 text-center">
           <Link href="/" className="text-neutral-500 hover:text-neutral-600 transition">
             Home
           </Link>
@@ -36,7 +36,7 @@ export default function Footer() {
             Dashboard
           </Link>
         </div>
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 text-center">
           <ExternalLink href="https://www.youtube.com/channel/UCuSNyLAKa5keYy7zaMGS2TA">
             YouTube
           </ExternalLink>
@@ -50,7 +50,7 @@ export default function Footer() {
             GitHub
           </ExternalLink>
         </div>
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 text-center">
           <ExternalLink href="mailto:anthonyriley@stanford.edu">
             Orienteering
           </ExternalLink>
@@ -65,6 +65,7 @@ export default function Footer() {
           </ExternalLink>
         </div>
       </div>
+      <p className="text-center">&copy; Anthony Riley</p>
     </footer>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import Title from "@/components/typography/Title";
 import { useMobile } from "@/lib/core";
 import { motion } from "framer-motion";

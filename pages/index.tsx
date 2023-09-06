@@ -6,7 +6,7 @@ import { Frontmatter } from "@/lib/types";
 import type { GetStaticProps, NextPage } from "next";
 import Portfolio from "@/components/interface/index/Portfolio";
 import Resume from "@/components/interface/index/Resume";
-import { supabase_admin } from "@/lib/supabase";
+import { admin } from "@/lib/supabase-admin";
 import { read } from 'gray-matter';
 
 type Post = {
@@ -34,18 +34,18 @@ const Home: NextPage<Props> = ({ posts }) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const popular = await supabase_admin
+  const popular = await admin
     .from("posts").select()
     .order('views', { ascending: false })
-    .limit(3);
-  if (popular.error) return { notFound: true };
+    .limit(1);
+  if (popular.error) return { props: { posts: [] } }
 
-  const latest = await supabase_admin
+  const latest = await admin
     .from("posts").select()
     .order('created_at', { ascending: false })
     .limit(1);
 
-  if (latest.error) return { notFound: true };
+  if (latest.error) throw Error("Should not be reached");
 
   const popular_posts = popular.data.map((post) => {
     const result = read(`./public/posts/${post.slug}.mdx`);

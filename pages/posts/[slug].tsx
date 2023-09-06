@@ -16,8 +16,7 @@ import Link from "next/link";
 import { calculateReadingLength } from "@/lib/core";
 import { useEffect, useState } from "react";
 import ProgressBar from "@/components/interface/blog/ProgressBar";
-import { supabase_admin } from "@/lib/supabase";
-import GoogleLogin from "@/components/core/auth/GoogleLogin";
+import { admin } from "@/lib/supabase-admin";
 
 const components = {
   Link,
@@ -81,9 +80,9 @@ const Post: NextPage<Props> = ({ slug, source, length }) => {
             )}
             <>
               <p>&bull;</p>
-              { views != undefined ? 
-                 <p className="whitespace-nowrap">{views} views</p> :
-                 <div className="h-4 w-16 rounded bg-neutral-500 animate-pulse"/>
+              {views != undefined ?
+                <p className="whitespace-nowrap">{views} views</p> :
+                <div className="h-4 w-16 rounded bg-neutral-500 animate-pulse" />
               }
             </>
           </div>
@@ -93,7 +92,7 @@ const Post: NextPage<Props> = ({ slug, source, length }) => {
         </div>
         <MDXRemote {...source} components={components} />
         {/* <h1 className="text-5xl font-bold my-8">Discussion</h1>
-        <div className="rounded border border-neutral-500 p-4">
+        <div className="flex flex-col items-center">
           <GoogleLogin />
         </div> */}
         <ProgressBar />
@@ -120,9 +119,9 @@ export const getStaticProps: GetStaticProps = async ({
   const slug = params ? params.slug : "";
   const source = fs.readFileSync(`./public/posts/${slug}.mdx`, "utf8");
   const serialized = await serialize(source, { parseFrontmatter: true });
-  const { error } = await supabase_admin
-            .from('posts')
-            .insert({ slug: slug });
+  const { error } = await admin
+    .from('posts')
+    .insert({ slug: slug });
   if (error && error.code != "23505") return { notFound: true };
   return {
     props: {

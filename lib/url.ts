@@ -1,0 +1,1 @@
+export const siteURL = process.env.NODE_ENV === 'production' ? 'https://anthonyriley.org' : 'http://localhost:3000';

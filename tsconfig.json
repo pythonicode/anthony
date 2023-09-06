@@ -17,10 +17,20 @@
     "baseUrl": "./",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/lib/*": ["lib/*"],
-      "@/posts/*": ["posts/*"]
-    }
+      "@/lib/*": ["lib/*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/theme.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "lib/theme.js",
+    ".next/types/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }

@@ -1,6 +1,7 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import ReactTyped from "react-typed";
 
 const borderAnimation = {
@@ -30,7 +31,7 @@ export default function Welcome() {
     else if (now.getUTCMonth() == 1 && now.getUTCDate() < 5) age -= 1;
     return age;
   };
-  
+
   return (
     <div className="flex flex-col-reverse justify-between items-center md:flex-row gap-8">
       <div className="grow">

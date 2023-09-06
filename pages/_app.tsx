@@ -2,9 +2,9 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
 
-import { Figtree } from "next/font/google";
+import { Jost } from "next/font/google";
 
-const font = Figtree({
+const font = Jost({
   subsets: ["latin"],
   variable: "--font-sans"
 });

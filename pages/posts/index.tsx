@@ -5,7 +5,6 @@ import { Frontmatter } from "@/lib/types";
 import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ResponsiveImage from "@/components/core/ResponsiveImage";
 import { getDateFromString } from "@/lib/date";
 import { calculateReadingLength } from "@/lib/core";
 import { motion } from "framer-motion";

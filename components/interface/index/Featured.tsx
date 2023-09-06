@@ -1,3 +1,5 @@
+"use client";
+
 import Title from "@/components/typography/Title";
 import { calculateReadingLength } from "@/lib/core";
 import { Frontmatter } from "@/lib/types";

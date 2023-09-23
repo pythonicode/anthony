@@ -15,13 +15,13 @@ export const metadata = {
 export default function CoachingPage() {
     return (
         <main>
-            <section className="min-h-screen flex flex-col items-center justify-center max-w-7xl mx-auto">
+            <section className="h-screen flex flex-col items-center justify-center max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-center gap-8 p-8">
-                    <div className="relative aspect-square max-w-md lg:max-w-none m-8">
+                    <div className="relative aspect-square max-w-md m-8">
                         <Image src="/images/coaching/goldengate.jpg" alt="Golden Gate Bridge" layout="fill" objectFit="cover" className="rounded" />
                     </div>
                     <div className="flex flex-col justify-center">
-                        <blockquote className={`relative leading-tight font-semibold md:text-xl lg:text-2xl text-neutral-700 ml-8 ${font.className}`}>
+                        <blockquote className={`relative leading-tight font-semibold md:text-xl text-neutral-700 ml-8 ${font.className}`}>
                             <FaQuoteLeft className="absolute -top-4 -left-10" />
                             Taking part in athletics is a choice that allows us to feel empowered. To show ourselves that we can
                             achieve the impossible, again and again without failure. It drives us to succeed in the face of great challenges,
@@ -36,7 +36,7 @@ export default function CoachingPage() {
                     <FaChevronDown size={20} className="mx-auto" />
                 </div>
             </section>
-            <section className="min-h-screen flex flex-col items-center justify-center max-w-7xl mx-auto">
+            <section className="min-h-screen flex flex-col items-center justify-center max-w-7xl mx-auto py-20">
                 <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-center gap-4 p-8 w-full">
                     <div className="flex flex-col justify-center md:p-8 lg:p-16 mt-16 lg:mt-0">
                         <h2 className="text-3xl font-semibold text-center mb-4">Private Coaching</h2>
